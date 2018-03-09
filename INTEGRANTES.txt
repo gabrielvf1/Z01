@@ -1,8 +1,5 @@
 Gabriel Valente Francato - vf_gabriel@yahoo.com.br
 Raphael de Luca de Azevedo - raphaelazev@hotmail.com.br
 Lucca Delchiaro Costabile - luccadelchiaro@gmail.com
-<<<<<<< HEAD
 Samuel Vinicius Granato de Barros - samuelvgb@al.insper.edu.br
-=======
 Luca Farah dos Santos-luca@ambientedecriacao.com.br
->>>>>>> 2c3f76a53557f4010edd349bfeea1c7f7d334f5d
