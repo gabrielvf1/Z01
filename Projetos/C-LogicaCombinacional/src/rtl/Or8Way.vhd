@@ -12,4 +12,8 @@ entity Or8Way is
 			g:   in  STD_LOGIC;
 			h:   in  STD_LOGIC;
 			q:   out STD_LOGIC);
-end entity;
+end Or8Way;
+architecture rtl  of Or8Way is 
+begin
+	q <= (a or b or c or d or e or f or g or h);
+end rtl; 
