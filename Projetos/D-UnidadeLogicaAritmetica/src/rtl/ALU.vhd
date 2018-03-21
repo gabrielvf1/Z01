@@ -43,6 +43,7 @@ end entity;
 
 architecture  rtl OF alu IS
 
+
 	component zerador16 IS
 		port(z   : in STD_LOGIC;
 			 a   : in STD_LOGIC_VECTOR(15 downto 0);
@@ -90,8 +91,26 @@ architecture  rtl OF alu IS
 		);
 	end component;
 
-   SIGNAL zxout,zyout,nxout,nyout,andout,adderout,muxout,precomp: std_logic_vector(15 downto 0);
+		SIGNAL zxout,zyout,nxout,nyout,andout,adderout,muxout,precomp: std_logic_vector(15 downto 0);
+		--signal x : std_logic_vector(15 downto 0) := x"0073"; -- 163
+		--signal y : std_logic_vector(15 downto 0) := x"005F"; -- 95
 
 begin
 
+zerox : zerador16 port map (zx,x,zxout);
+negax : inversor16 port map (nx,zxout,nxout);
+
+zeray : zerador16 port map (zy,y,zyout);
+negay : inversor16 port map (ny,zyout,nyout);
+
+pand : And16 port map (nxout, nyout,andout);
+padd : Add16 port map (nxout, nyout,adderout);
+
+pmux : Mux16 port map (andout,adderout,f,muxout);
+
+pinv : inversor16 port map(no,muxout,saida);
+
+pcomp : comparador16 port map(saida,zr,ng);
+
 end architecture;
+
