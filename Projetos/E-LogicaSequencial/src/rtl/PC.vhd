@@ -33,23 +33,52 @@ component Inc16 is
 	);
 end component;
 
-signal inc: STD_LOGIC_VECTOR(15 downto 0);
-signal outp: STD_LOGIC_VECTOR(15 downto 0);
+component Mux16 is
+	port ( 
+			a:   in  STD_LOGIC_VECTOR(15 downto 0);
+			b:   in  STD_LOGIC_VECTOR(15 downto 0);
+			sel: in  STD_LOGIC;
+			q:   out STD_LOGIC_VECTOR(15 downto 0)
+		);
+end component;
+
+component Register16 is
+port(
+		clock:   in STD_LOGIC;
+		input:   in STD_LOGIC_VECTOR(15 downto 0);
+		load:    in STD_LOGIC;
+		output: out STD_LOGIC_VECTOR(15 downto 0)
+	);
+end component;
+
+--S -> saída --E --> Entrada
+signal incS: STD_LOGIC_VECTOR(15 downto 0);
+signal TempInput: STD_LOGIC_VECTOR(15 downto 0);
+signal TempOutput: STD_LOGIC_VECTOR(15 downto 0);
+signal RegStore: STD_LOGIC_VECTOR(15 downto 0);
+signal MuxS: STD_LOGIC_VECTOR(15 downto 0);
+signal TempLoad: STD_LOGIC;
 
 begin
-bitincrementer: Inc16 Port Map(input,inc);
-	process(clock,reset,increment,load)
-	begin
+process(reset,input,TempInput)
+begin
 	if(reset = '1') then
-	output <= "0000000000000000";
-	elsif(rising_edge(clock)) then
-	if (load = '1') then 
-	output <= input;
-	elsif (increment = '1') then
-	output <= inc;
+	TempInput <= "0000000000000000";
+	TempLoad <= '1';
 	else
-	output <= outp;
+	TempInput <= input;
+	TempLoad <= load;
+
 	end if;
-	end if; 
-	end process;
+end process;
+
+	bitincrementer: Inc16 PORT MAP(MuxS,incS);
+	TempOutput <= incS when increment = '1'
+		else MuxS;
+
+	Reg16: Register16 PORT MAP(clock,TempOutput, '1' ,RegStore);
+
+	Mux: Mux16 PORT MAP(RegStore,TempInput,TempLoad,MuxS);
+	output <= MuxS;
+
 end architecture;
