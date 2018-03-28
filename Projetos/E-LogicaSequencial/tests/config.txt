@@ -10,4 +10,9 @@ Register64.vhd
 #Ram8.vhd
 #Ram64.vhd
 #Ram512.vhd
+<<<<<<< HEAD
 #Ram4K.vhd
+=======
+#Ram4K.vhd
+PC.vhd
+>>>>>>> upstream/master
