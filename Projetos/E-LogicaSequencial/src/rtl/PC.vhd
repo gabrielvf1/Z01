@@ -26,7 +26,30 @@ end entity;
 
 architecture arch of PC is
 
+component Inc16 is
+	port(
+		a   :  in STD_LOGIC_VECTOR(15 downto 0);
+		q   : out STD_LOGIC_VECTOR(15 downto 0)
+	);
+end component;
+
+signal inc: STD_LOGIC_VECTOR(15 downto 0);
+signal outp: STD_LOGIC_VECTOR(15 downto 0);
+
 begin
-
-
+bitincrementer: Inc16 Port Map(input,inc);
+	process(clock,reset,increment,load)
+	begin
+	if(reset = '1') then
+	output <= "0000000000000000";
+	elsif(rising_edge(clock)) then
+	if (load = '1') then 
+	output <= input;
+	elsif (increment = '1') then
+	output <= inc;
+	else
+	output <= outp;
+	end if;
+	end if; 
+	end process;
 end architecture;
