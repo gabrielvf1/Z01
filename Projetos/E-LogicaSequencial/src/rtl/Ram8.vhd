@@ -57,6 +57,8 @@ component DMux8Way16 is
 end component DMux8Way16;
 
 signal output_dmux,output_reg:STD_LOGIC_VECTOR(127 downto 0);
+signal load1,load2,load3,load4,load5,load6,load7,load8:STD_LOGIC;
+
 
 begin
 	dm : DMux8Way16 port map(input,address,
@@ -68,16 +70,26 @@ begin
 		output_dmux(47 downto 32),
 		output_dmux(31 downto 16),
 		output_dmux(15 downto 0));
+
+
+	load1 <= load when (address = "000") else '0';
+	load2 <= load when (address = "001") else '0';
+	load3 <= load when (address = "010") else '0';
+	load4 <= load when (address = "011") else '0';
+	load5 <= load when (address = "100") else '0';
+	load6 <= load when (address = "101") else '0';
+	load7 <= load when (address = "110") else '0';
+	load8 <= load when (address = "111") else '0';
 	
 
-	r1 : Register16 port map(clock,output_dmux(127 downto 112),load,output_reg(127 downto 112));
-	r2 : Register16 port map(clock,output_dmux(111 downto 96),load,output_reg(111 downto 96));
-	r3 : Register16 port map(clock,output_dmux(95 downto 80),load,output_reg(95 downto 80));
-	r4 : Register16 port map(clock,output_dmux(79 downto 64),load,output_reg(79 downto 64));
-	r5 : Register16 port map(clock,output_dmux(63 downto 48),load,output_reg(63 downto 48));
-	r6 : Register16 port map(clock,output_dmux(47 downto 32),load,output_reg(47 downto 32));
-	r7 : Register16 port map(clock,output_dmux(31 downto 16),load,output_reg(31 downto 16));
-	r8 : Register16 port map(clock,output_dmux(15 downto 0),load,output_reg(15 downto 0));
+	r1 : Register16 port map(clock,output_dmux(127 downto 112),load1,output_reg(127 downto 112));
+	r2 : Register16 port map(clock,output_dmux(111 downto 96),load2,output_reg(111 downto 96));
+	r3 : Register16 port map(clock,output_dmux(95 downto 80),load3,output_reg(95 downto 80));
+	r4 : Register16 port map(clock,output_dmux(79 downto 64),load4,output_reg(79 downto 64));
+	r5 : Register16 port map(clock,output_dmux(63 downto 48),load5,output_reg(63 downto 48));
+	r6 : Register16 port map(clock,output_dmux(47 downto 32),load6,output_reg(47 downto 32));
+	r7 : Register16 port map(clock,output_dmux(31 downto 16),load7,output_reg(31 downto 16));
+	r8 : Register16 port map(clock,output_dmux(15 downto 0),load8,output_reg(15 downto 0));
 
 	mx : Mux8Way16 port map(
 		output_reg(127 downto 112),
