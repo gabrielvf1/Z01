@@ -11,7 +11,7 @@ entity FlipFlopD is
 		d:      in std_logic;
 		clear:  in std_logic;
 		preset: in std_logic;
-		q:     out std_logic
+		q:     out std_logic := '0'
 	);
 end entity;
 
