@@ -1,42 +1,9 @@
-<<<<<<< HEAD
 leaw $R1,%A
-movw (%A),%D
-leaw $R0,%A
-movw %D,(%A)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-leaw $8, %A
->>>>>>> upstream/master
-
-
-
-
-
+movw (%A), %D
+leaw %R0,%A
+addw (%A),%D,%S
+leaw $R2, %A
+movw %S, (%A)
 
 
 
