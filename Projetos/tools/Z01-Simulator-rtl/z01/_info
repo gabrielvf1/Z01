@@ -1321,9 +1321,15 @@ VKBL5>Ro7hBH5PI405F^?D2
 !s100 z;gX9;^C^]PK>DXWS[V?j0
 R6
 32
+<<<<<<< HEAD
 Z159 !s110 1524080473
 !i10b 1
 Z160 !s108 1524080473.000000
+=======
+Z159 !s110 1524077285
+!i10b 1
+Z160 !s108 1524077285.000000
+>>>>>>> c9a779b98b8a07977a99616f6e90b0abe49a6846
 Z161 !s90 -work|z01|./Modulos/dispositivos/RAM_fpga/RAM16K.vhd|
 Z162 !s107 ./Modulos/dispositivos/RAM_fpga/RAM16K.vhd|
 !i113 1
