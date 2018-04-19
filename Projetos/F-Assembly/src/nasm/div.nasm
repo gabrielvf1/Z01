@@ -57,6 +57,3 @@ movw %D,(%A)
 
 END:
 nop
-
-
-
