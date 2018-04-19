@@ -10,7 +10,6 @@ while1:
 	movw (%A), %D
 	leaw $R2, %A
 	addw (%A), %D, %S
-	leaw $R2, %A
 	movw %S, (%A)
 
 
