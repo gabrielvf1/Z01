@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 leaw $R1,%A
 movw (%A),%D
 leaw $R3,%A
@@ -40,6 +41,39 @@ leaw $R0,%A
 movw %S,(%A)
 END:
 nop
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> upstream/master
 
 
 
