@@ -1,4 +1,4 @@
-library ieee;
+  library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
@@ -32,6 +32,7 @@ entity MemoryIO is
 
 		);
 end entity;
+
 
 
 ARCHITECTURE logic OF MemoryIO IS
@@ -69,7 +70,79 @@ ARCHITECTURE logic OF MemoryIO IS
       );
   end component;
 
+   component Register16 IS
+      PORT
+      (
+          clock:   in STD_LOGIC;
+          input:   in STD_LOGIC_VECTOR(15 downto 0);
+          load:    in STD_LOGIC;
+          output: out STD_LOGIC_VECTOR(15 downto 0)
+      );
+  end component;
+
+  component DMux4Way IS
+      PORT
+      (
+              a:   in  STD_LOGIC;
+              sel: in  STD_LOGIC_VECTOR(1 downto 0);
+              q0:  out STD_LOGIC;
+              q1:  out STD_LOGIC;
+              q2:  out STD_LOGIC;
+              q3:  out STD_LOGIC);
+      );
+  end component;
+
+    component Mux16 IS
+      PORT
+      (
+              a:   in  STD_LOGIC_VECTOR(15 downto 0);
+              b:   in  STD_LOGIC_VECTOR(15 downto 0);
+              sel: in  STD_LOGIC;
+              q: out STD_LOGIC_VECTOR(15 downto 0));
+      );
+  end component;
+
+
+signal sel2, loadRegister, loadScreen, wrenRAM: STD_LOGIC;
+signal sel1: STD_LOGIC_VECTOR(1 downto 0);
+signal inputRegister : STD_LOGIC(9 downto 0);
+signal outLed,inputScreen,s_LCD_D,saidaMux: STD_LOGIC_VECTOR(15 downto 0);
+signal adressScreen : STD_LOGIC_VECTOR(13 downto 0);
+signal inputRAM,,outputRAM : STD_LOGIC_VECTOR(14 downto 0);
+signal s_LCD_CS_N, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N ,s_LCD_ON , s_LCD_INIT_OK : STD_LOGIC; 
+
+
 BEGIN
+
+DMux: DMux4Way PORT MAP (LOAD, sel1, wrenRAM, loadRegister, loadScreen, '0');
+inputRAM<=INPUT(14 downto 0);
+RAM16: RAM16K PORT MAP (ADDRESS,CLK_FAST,inputRAM,wrenRAM,outputRAM);
+Mux: Mux16 PORT MAP (outputRAM,SW,sel2,saidaMux);
+
+inputRegister <= INPUT(9 downto 0);
+R16: Register16 PORT MAP (CLK_SLOW,inputRegister,loadRegister,outLed);
+
+adressScreen <= ADDRESS(13 downto 0);
+
+inputScreen <= INPUT(14 downto 0);
+S: Screen PORT MAP (inputScreen,loadScreen,adressScreen,CLK_FAST,CLK_SLOW,RST,s_LCD_CS_N , s_LCD_D, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N ,s_LCD_ON , s_LCD_INIT_OK); 
+
+
+
+
+LCD_CS_N    <= s_LCD_CS_N;
+LCD_D       <= s_LCD_D;
+LCD_RD_N    <= s_LCD_RD_N;
+LCD_RESET_N <= s_LCD_RESET_N;
+LCD_RS      <= s_LCD_RS;
+LCD_WR_N    <= s_LCD_WR_N;
+LCD_INIT_OK <= s_LCD_INIT_OK;
+
+
+
+
+LED <= outLed;
+OUTPUT <= saidaMux;
 
 
 END logic;
