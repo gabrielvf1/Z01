@@ -63,8 +63,8 @@ ARCHITECTURE logic OF Computador IS
 	component MemoryIO is
 		PORT(
 			  -- Sistema
-        CLK_SLOW : IN  STD_LOGIC;
-        CLK_FAST : IN  STD_LOGIC;
+		      CLK_SLOW : IN  STD_LOGIC;
+		      CLK_FAST : IN  STD_LOGIC;
 			  RST      : IN  STD_LOGIC;
 
 			  -- RAM 16K
@@ -100,7 +100,7 @@ ARCHITECTURE logic OF Computador IS
 
 
   SIGNAL INPUT        : STD_LOGIC_VECTOR(15 downto 0) := "1111111111111111";
-  SIGNAL ADDRESS      : STD_LOGIC_VECTOR(14 downto 0) := (others => '0') ; -- meio 00100101101010
+  SIGNAL ADDRESS      : STD_LOGIC_VECTOR(14 downto 0) := (others => '0') ; -- meio 00100101101010 ????????????????????????
   SIGNAL LOAD         : STD_LOGIC := '0';
   SIGNAL LCD_INIT_OK  : STD_LOGIC;
 
@@ -112,8 +112,13 @@ ARCHITECTURE logic OF Computador IS
 
   SIGNAL OUTPUT_RAM   : STD_LOGIC_VECTOR(15 downto 0);
   SIGNAL INSTRUCTION  : STD_LOGIC_VECTOR(15 downto 0);
-  SIGNAL PC			      : STD_LOGIC_VECTOR(14 downto 0);
-
+  SIGNAL PC			  : STD_LOGIC_VECTOR(14 downto 0);
+  SIGNAL InM_Mem_Out, s_LCD_D   : STD_LOGIC_VECTOR(15 downto 0);
+  SIGNAL cpuOutM   : STD_LOGIC_VECTOR(15 downto 0);
+  SIGNAL writeM   : STD_LOGIC;
+  SIGNAL addressM : STD_LOGIC_VECTOR(14 downto 0);
+  Signal s_LCD_CS_N, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N ,s_LCD_ON  : STD_LOGIC;
+  signal s_LEDR :  STD_LOGIC_VECTOR(9 DOWNTO 0);
 
 BEGIN
 
@@ -125,9 +130,14 @@ BEGIN
     locked   => PLL_LOCKED
      );
 
+	ROM32KPort: ROM32K PORT MAP (PC,CLK_SLOW,INSTRUCTION);
+	CpuPORT: CPU PORT MAP (CLK_SLOW,InM_Mem_Out,INSTRUCTION,RST_CPU,cpuOutM,writeM,addressM,PC);
+	MemoryIOPort: MemoryIO PORT MAP (CLK_SLOW,CLK_FAST,RST_MEM,ADDRESS,INPUT,LOAD,InM_Mem_Out, s_LCD_CS_N , s_LCD_D, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N ,s_LCD_ON , LCD_INIT_OK, SW, s_LEDR);
+
+	LEDR <= s_LEDR;
 
   -- Resets
-  RST_CPU <= RESET or (not LCD_INIT_OK) or (not PLL_LOCKED); -- REINICIA CPU
+ 	RST_CPU <= RESET or (not LCD_INIT_OK) or (not PLL_LOCKED); -- REINICIA CPU
 	RST_MEM <= RESET or (not PLL_LOCKED);                      -- REINICIA MemoryIO
 	RESET   <= NOT RESET_N;
 
