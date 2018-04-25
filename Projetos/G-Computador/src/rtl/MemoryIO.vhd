@@ -16,7 +16,7 @@ entity MemoryIO is
         LOAD		: IN  STD_LOGIC ;
         OUTPUT		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
 
-        -- LCD EXTERNAL I/OS
+        -- LCD EXTERNAL I/OSP
         LCD_CS_N     : OUT   STD_LOGIC;
         LCD_D        : INOUT STD_LOGIC_VECTOR(15 downto 0);
         LCD_RD_N     : OUT   STD_LOGIC;
@@ -103,30 +103,45 @@ ARCHITECTURE logic OF MemoryIO IS
   end component;
 
 
-signal sel2, loadRegister, loadScreen, wrenRAM: STD_LOGIC;
+signal sel2, loadRegister, loadScreen, loadRAM, load0, : STD_LOGIC;
+signal s_LCD_CS_N, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N , s_LCD_INIT_OK : STD_LOGIC; 
+
 signal sel1: STD_LOGIC_VECTOR(1 downto 0);
-signal inputRegister : STD_LOGIC(9 downto 0);
-signal outLed,inputScreen,s_LCD_D,saidaMux: STD_LOGIC_VECTOR(15 downto 0);
-signal adressScreen : STD_LOGIC_VECTOR(13 downto 0);
-signal inputRAM,,outputRAM : STD_LOGIC_VECTOR(14 downto 0);
-signal s_LCD_CS_N, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N ,s_LCD_ON , s_LCD_INIT_OK : STD_LOGIC; 
+
+signal outputRAM, outLed, inputScreen, s_LCD_D, saidaMux, sw15: STD_LOGIC_VECTOR(15 downto 0);
+
+
+--signal adressScreen : STD_LOGIC_VECTOR(13 downto 0);
 
 
 BEGIN
 
-DMux: DMux4Way PORT MAP (LOAD, sel1, wrenRAM, loadRegister, loadScreen, '0');
-inputRAM<=INPUT(14 downto 0);
-RAM16: RAM16K PORT MAP (ADDRESS,CLK_FAST,inputRAM,wrenRAM,outputRAM);
-Mux: Mux16 PORT MAP (outputRAM,SW,sel2,saidaMux);
+sel1 <= "00" when(ADDRESS <= "011111111111111") 
+        else "01" when (ADDRESS <= "101001010111111")
+        else "10" when (ADDRESS <= "101001011000000")
+        else "11";
+sel2 <= '1' when(ADDRESS <= "011111111111111")
+        else '0';
 
-inputRegister <= INPUT(9 downto 0);
-R16: Register16 PORT MAP (CLK_SLOW,inputRegister,loadRegister,outLed);
+DMux: DMux4Way PORT MAP (LOAD, sel1, loadRAM, loadRegister, loadScreen, load0);
 
-adressScreen <= ADDRESS(13 downto 0);
+RAM16: RAM16K PORT MAP (ADDRESS(13 downto 0),CLK_FAST,INPUT(15 downto 0),loadRAM, outputRAM);
 
-inputScreen <= INPUT(14 downto 0);
-S: Screen PORT MAP (inputScreen,loadScreen,adressScreen,CLK_FAST,CLK_SLOW,RST,s_LCD_CS_N , s_LCD_D, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N ,s_LCD_ON , s_LCD_INIT_OK); 
+sw15 <= "000000" & SW;
 
+Mux: Mux16 PORT MAP (sw15, outputRAM , sel2, saidaMux);
+
+R16: Register16 PORT MAP (CLK_SLOW,INPUT(15 downto 0), loadRegister, outLed);
+--adressScreen <= ADDRESS(13 downto 0);
+--inputScreen <= INPUT(15 downto 0);
+S: Screen PORT MAP (INPUT(15 downto 0),loadScreen,ADDRESS(13 downto 0), CLK_FAST, CLK_SLOW, RST, 
+  s_LCD_INIT_OK, 
+  s_LCD_CS_N , 
+  s_LCD_D, 
+  s_LCD_RD_N , 
+  s_LCD_RESET_N , 
+  s_LCD_RS , 
+  s_LCD_WR_N);
 
 
 
@@ -137,11 +152,10 @@ LCD_RESET_N <= s_LCD_RESET_N;
 LCD_RS      <= s_LCD_RS;
 LCD_WR_N    <= s_LCD_WR_N;
 LCD_INIT_OK <= s_LCD_INIT_OK;
+LCD_ON <= '1';
 
 
-
-
-LED <= outLed;
+LED <= outLed(9 downto 0);
 OUTPUT <= saidaMux;
 
 
