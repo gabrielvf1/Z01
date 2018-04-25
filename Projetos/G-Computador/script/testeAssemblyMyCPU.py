@@ -25,16 +25,20 @@ def testeAssembly(jar, testDir, nasmDir, hackDir, gui, verbose):
     pwd = os.path.dirname(os.path.abspath(__file__))
     rtlDir = os.path.join(pwd,'..','Z01-Simulator-RTL')
 
+
+
     # global path
     os.path.abspath(nasm)
     os.path.abspath(hack)
+
+    print(rtlDir)
+
 
     # compila
     print("-------------------------")
     print("- Assembling files .... " )
     print("-------------------------")
     assembler(jar, nasm, hack, True) 
-
 
     # simulando
     print("-------------------------")

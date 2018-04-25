@@ -5,9 +5,12 @@
 
 ; faz uma subtracao binaria do valor de :  RAM[1] - RAM[0] gravando em RAM[2].
 
-leaw $R1,%A
+leaw $R2,%A
 movw (%A), %D
 leaw %R0,%A
 subw %D,(%A),%S
 leaw $R2, %A
 movw %S, (%A)
+
+; movw %A, %D
+; movw %D, (%A)

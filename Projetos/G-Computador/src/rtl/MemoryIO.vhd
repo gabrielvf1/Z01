@@ -17,14 +17,14 @@ entity MemoryIO is
         OUTPUT		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
 
         -- LCD EXTERNAL I/OSP
-        LCD_CS_N     : OUT   STD_LOGIC;
-        LCD_D        : INOUT STD_LOGIC_VECTOR(15 downto 0);
-        LCD_RD_N     : OUT   STD_LOGIC;
-        LCD_RESET_N  : OUT   STD_LOGIC;
-        LCD_RS       : OUT   STD_LOGIC;	-- (DCx) 0 : reg, 1: command
-        LCD_WR_N     : OUT   STD_LOGIC;
+        LCD_CS_N     : OUT   STD_LOGIC :='0';
+        LCD_D        : INOUT STD_LOGIC_VECTOR(15 downto 0) :=(others => '0');
+        LCD_RD_N     : OUT   STD_LOGIC :='0';
+        LCD_RESET_N  : OUT   STD_LOGIC :='0';
+        LCD_RS       : OUT   STD_LOGIC :='0';	-- (DCx) 0 : reg, 1: command
+        LCD_WR_N     : OUT   STD_LOGIC :='0';
         LCD_ON       : OUT   STD_LOGIC := '1';	-- liga e desliga o LCD
-        LCD_INIT_OK  : OUT   STD_LOGIC;
+        LCD_INIT_OK  : OUT   STD_LOGIC ;
 
         -- Switchs
         SW  : in std_logic_vector(9 downto 0);
@@ -125,7 +125,7 @@ sel2 <= '1' when(ADDRESS = "011111111111111")
 
 DMux: DMux4Way PORT MAP (LOAD, sel1, loadRAM, loadRegister, loadScreen, load0);
 
-RAM16: RAM16K PORT MAP (ADDRESS(13 downto 0),CLK_FAST,INPUT(15 downto 0),loadRAM, outputRAM);
+RAM: RAM16K PORT MAP (ADDRESS(13 downto 0),CLK_FAST,INPUT(15 downto 0),loadRAM, outputRAM);
 
 sw15 <= "000000" & SW;
 
