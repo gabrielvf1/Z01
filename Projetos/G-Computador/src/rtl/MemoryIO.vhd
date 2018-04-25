@@ -70,7 +70,7 @@ ARCHITECTURE logic OF MemoryIO IS
       );
   end component;
 
-   component Register16 IS
+  component Register16 IS
       PORT
       (
           clock:   in STD_LOGIC;
@@ -88,22 +88,22 @@ ARCHITECTURE logic OF MemoryIO IS
               q0:  out STD_LOGIC;
               q1:  out STD_LOGIC;
               q2:  out STD_LOGIC;
-              q3:  out STD_LOGIC);
+              q3:  out STD_LOGIC
       );
   end component;
 
-    component Mux16 IS
+  component Mux16 IS
       PORT
       (
               a:   in  STD_LOGIC_VECTOR(15 downto 0);
               b:   in  STD_LOGIC_VECTOR(15 downto 0);
               sel: in  STD_LOGIC;
-              q: out STD_LOGIC_VECTOR(15 downto 0));
+              q: out STD_LOGIC_VECTOR(15 downto 0)
       );
   end component;
 
 
-signal sel2, loadRegister, loadScreen, loadRAM, load0, : STD_LOGIC;
+signal sel2, loadRegister, loadScreen, loadRAM, load0 : STD_LOGIC;
 signal s_LCD_CS_N, s_LCD_RD_N , s_LCD_RESET_N , s_LCD_RS , s_LCD_WR_N , s_LCD_INIT_OK : STD_LOGIC; 
 
 signal sel1: STD_LOGIC_VECTOR(1 downto 0);
