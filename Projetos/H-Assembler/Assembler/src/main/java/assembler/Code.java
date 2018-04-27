@@ -35,7 +35,9 @@ public class Code {
      * @return Opcode (String de 3 bits) com código em linguagem de máquina para a instrução.
      */
     public static String jump(String[] mnemnonic) {
-    	return null;
+    	String jumpBin = "";
+    	jumpBin = "111";
+    	return jumpBin;
     }
 
     /**
