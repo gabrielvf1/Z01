@@ -9,6 +9,7 @@ entity DMux4Way is
 			q1:  out STD_LOGIC;
 			q2:  out STD_LOGIC;
 			q3:  out STD_LOGIC);
+<<<<<<< HEAD
 end DMux4Way;
 
 architecture rtl of DMux4Way is
@@ -18,3 +19,6 @@ begin
 	q2 <= a when sel="10" else '0';
 	q3 <= a when sel="11" else '0';
 end rtl;
+=======
+end entity;
+>>>>>>> upstream/master

@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 ﻿# Testes a serem executados
 # Descomente os módulos que deseja testar
   
 #FlipFlopD.vhd
+=======
+# Testes a serem executados
+# Descomente os módulos que deseja testar
+  
+FlipFlopD.vhd
+>>>>>>> upstream/master
 #BinaryDigit.vhd
 #Register8.vhd
 #Register16.vhd

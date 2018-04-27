@@ -13,6 +13,7 @@ entity Mux8Way16 is
 			h:   in  STD_LOGIC_VECTOR(15 downto 0);
 			sel: in  STD_LOGIC_VECTOR(2 downto 0);
 			q:   out STD_LOGIC_VECTOR(15 downto 0));
+<<<<<<< HEAD
 end Mux8Way16;
 
 architecture rtl of Mux8Way16 is
@@ -27,3 +28,6 @@ begin
    		 h;
 
 end rtl;
+=======
+end entity;
+>>>>>>> upstream/master

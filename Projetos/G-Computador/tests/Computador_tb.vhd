@@ -33,11 +33,17 @@ ARCHITECTURE rtl OF Computador_tb IS
     LCD_RESET_N  : OUT   STD_LOGIC;
     LCD_RS       : OUT   STD_LOGIC;	      -- (DCx) 0 : reg, 1: command
     LCD_WR_N     : OUT   STD_LOGIC;
+<<<<<<< HEAD
 		LCD_ON       : OUT   STD_LOGIC;	-- liga e desliga o LCD
 
 		-- Tecl => key_clk      : IN    STD_LOGIC;         -- clock signal from PS/2 keyboard
 		key_clk      : IN    STD_LOGIC;         -- clock signal from PS/2 keyboard
 		key_data     : IN    STD_LOGIC          -- data signal from PS/2 keyboard
+=======
+		LCD_ON       : OUT   STD_LOGIC	-- liga e desliga o LCD
+
+		-- Tecl => key_clk      : IN    STD_LOGIC;         -- clock signal from PS/2 keyboard
+>>>>>>> upstream/master
     );
   end component;
 
@@ -51,7 +57,11 @@ begin
   process
   begin
     reset_n <= '0';
+<<<<<<< HEAD
     wait for 500 ns;
+=======
+    wait for 1 ns;
+>>>>>>> upstream/master
     reset_n <= '1';
     wait;
   end process;
@@ -67,9 +77,13 @@ begin
     LCD_RESET_N => open,
     LCD_RS      => open,
     LCD_WR_N    => open,
+<<<<<<< HEAD
     LCD_on      => open,
     key_clk     => '0',
     key_data    => '0'
+=======
+    LCD_on      => open
+>>>>>>> upstream/master
     );
 
 end             rtl;

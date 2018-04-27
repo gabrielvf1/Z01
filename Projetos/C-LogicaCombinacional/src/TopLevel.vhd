@@ -32,6 +32,7 @@ architecture rtl of TopLevel is
 --------------
 -- signals
 --------------
+<<<<<<< HEAD
 component not16 is
 	port ( 
 			a:   in  STD_LOGIC_VECTOR(15 downto 0);
@@ -46,12 +47,15 @@ component and16 is
 end component;
 
 signal interno, interno2 : std_logic;
+=======
+>>>>>>> upstream/master
 
 ---------------
 -- implementacao
 ---------------
 begin
  
+<<<<<<< HEAD
 
   and1 : and16 port map (
   	a(0) 				=> interno,
@@ -82,4 +86,8 @@ begin
   
 --LEDR(8) <= (not1 SW(0)) and1 SW(1) and1 SW(2); 
 --
+=======
+  LEDR(0) <= SW(0);
+
+>>>>>>> upstream/master
 end rtl;

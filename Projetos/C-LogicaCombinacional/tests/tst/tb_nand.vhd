@@ -24,6 +24,13 @@ architecture tb of tb_nand is
 
   signal  inA, inB, outQ : STD_LOGIC;
 
+<<<<<<< HEAD
+=======
+  -- Clock
+  constant CLK_PERIOD : time := 1 ns;
+  signal clk : STD_LOGIC := '0';
+
+>>>>>>> upstream/master
 begin
 
   mapping: nand_vhdl port map(inA, inB, outQ);

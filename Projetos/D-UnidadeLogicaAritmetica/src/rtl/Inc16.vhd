@@ -24,6 +24,7 @@ component HalfAdder is
 	);
 end component;
 
+<<<<<<< HEAD
 signal B : STD_LOGIC_VECTOR(15 downto 0);
 
 begin
@@ -44,5 +45,8 @@ begin
 	halfadd14 : HalfAdder PORT MAP (a(14), B(13), q(14), B(14));
 	halfadd15 : HalfAdder PORT MAP (a(15), B(14), q(15), B(15));
 
+=======
+begin
+>>>>>>> upstream/master
 
 end architecture;

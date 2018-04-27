@@ -7,12 +7,18 @@
 #abs 2 1000
 #div  2 80000
 <<<<<<< HEAD
+<<<<<<< HEAD
 mod 3 80000
 #factorial 2 10000
 #pow 2 80000
 =======
+=======
+>>>>>>> upstream/master
 #mod 2 10000
 #factorial 2 10000
 #pow 2 80000
 #mult 2 10000
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
 >>>>>>> upstream/master

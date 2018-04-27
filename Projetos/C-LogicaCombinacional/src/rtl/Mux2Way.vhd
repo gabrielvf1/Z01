@@ -7,6 +7,7 @@ entity Mux2Way is
 			b:   in  STD_LOGIC;
 			sel: in  STD_LOGIC;
 			q:   out STD_LOGIC);
+<<<<<<< HEAD
 end Mux2Way;
 
 architecture rtl of Mux2Way is
@@ -14,3 +15,6 @@ begin
 	q <= a when sel='0'
          else b;
 end rtl;
+=======
+end entity;
+>>>>>>> upstream/master

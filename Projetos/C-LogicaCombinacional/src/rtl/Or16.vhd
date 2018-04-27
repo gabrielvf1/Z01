@@ -6,9 +6,13 @@ entity Or16 is
 			a:   in  STD_LOGIC_VECTOR(15 downto 0);
 			b:   in  STD_LOGIC_VECTOR(15 downto 0);
 			q:   out STD_LOGIC_VECTOR(15 downto 0));
+<<<<<<< HEAD
 end Or16;
 
 architecture rtl of Or16 is
 begin 
 	q <= a or b;
 end rtl;
+=======
+end entity;
+>>>>>>> upstream/master

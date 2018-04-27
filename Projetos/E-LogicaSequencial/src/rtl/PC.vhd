@@ -26,6 +26,7 @@ end entity;
 
 architecture arch of PC is
 
+<<<<<<< HEAD
 component Inc16 is
 	port(
 		a   :  in STD_LOGIC_VECTOR(15 downto 0);
@@ -80,5 +81,9 @@ end process;
 
 	Mux: Mux16 PORT MAP(RegStore,TempInput,TempLoad,MuxS);
 	output <= MuxS;
+=======
+begin
+
+>>>>>>> upstream/master
 
 end architecture;

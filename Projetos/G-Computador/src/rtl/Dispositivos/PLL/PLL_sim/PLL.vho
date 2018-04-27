@@ -3,6 +3,7 @@
 
 
 -- Copyright (C) 2017  Intel Corporation. All rights reserved.
+<<<<<<< HEAD
 -- Your use of Intel Corporation's design tools, logic functions 
 -- and other software and tools, and its AMPP partner logic 
 -- functions, and any output files from any of the foregoing 
@@ -15,12 +16,27 @@
 -- that your use is for the sole purpose of programming logic 
 -- devices manufactured by Intel and sold by Intel or its 
 -- authorized distributors.  Please refer to the applicable 
+=======
+-- Your use of Intel Corporation's design tools, logic functions
+-- and other software and tools, and its AMPP partner logic
+-- functions, and any output files from any of the foregoing
+-- (including device programming or simulation files), and any
+-- associated documentation or information are expressly subject
+-- to the terms and conditions of the Intel Program License
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel MegaCore Function License Agreement, or other
+-- applicable license agreement, including, without limitation,
+-- that your use is for the sole purpose of programming logic
+-- devices manufactured by Intel and sold by Intel or its
+-- authorized distributors.  Please refer to the applicable
+>>>>>>> upstream/master
 -- agreement for further details.
 
 -- You may only use these simulation model output files for simulation
 -- purposes and expressly not for synthesis or any other purposes (in which
 -- event Intel disclaims all warranties of any kind).
 
+<<<<<<< HEAD
 
 --synopsys translate_off
 
@@ -34,16 +50,29 @@
  ENTITY  PLL IS 
 	 PORT 
 	 ( 
+=======
+ LIBRARY ieee;
+ USE ieee.std_logic_1164.all;
+
+ ENTITY  PLL IS
+	 PORT
+	 (
+>>>>>>> upstream/master
 		 locked	:	OUT  STD_LOGIC;
 		 outclk_0	:	OUT  STD_LOGIC;
 		 outclk_1	:	OUT  STD_LOGIC;
 		 refclk	:	IN  STD_LOGIC;
 		 rst	:	IN  STD_LOGIC
+<<<<<<< HEAD
 	 ); 
+=======
+	 );
+>>>>>>> upstream/master
  END PLL;
 
  ARCHITECTURE RTL OF PLL IS
 
+<<<<<<< HEAD
 	 ATTRIBUTE synthesis_clearbox : natural;
 	 ATTRIBUTE synthesis_clearbox OF RTL : ARCHITECTURE IS 1;
 	 SIGNAL  wire_gnd	:	STD_LOGIC;
@@ -307,3 +336,27 @@
  END RTL; --PLL
 --synopsys translate_on
 --VALID FILE
+=======
+  signal clkFast : std_logic := '0';
+  signal clkSlow : std_logic := '0';
+  signal lock    : std_logic := '0';
+ begin
+
+  clkFast <= not clkFast after 100 ps;
+  clkSlow <= not clkSlow after 500 ps;
+
+r : process
+ begin
+   wait until rst = '0';
+   lock <= '0';
+   wait for 3 ns;
+   lock <= '1';
+   wait;
+end process;
+
+    outclk_0 <= clkFast and lock;
+    outclk_1 <= clkSlow and lock;
+    locked   <= lock;
+
+ end rtl;
+>>>>>>> upstream/master

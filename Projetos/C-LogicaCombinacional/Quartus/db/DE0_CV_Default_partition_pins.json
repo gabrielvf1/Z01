@@ -10,6 +10,7 @@
 				{
 					"name" : "SW[0]",
 					"strict" : false
+<<<<<<< HEAD
 				},
 				{
 					"name" : "SW[1]",
@@ -18,6 +19,8 @@
 				{
 					"name" : "SW[2]",
 					"strict" : false
+=======
+>>>>>>> upstream/master
 				}
 			]
 		}

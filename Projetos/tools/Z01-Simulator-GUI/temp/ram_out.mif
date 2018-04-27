@@ -2,6 +2,7 @@
 // instance=/computador_tb/c1/MEMORY_MAPED/RAM/altsyncram_component/MEMORY/m_mem_data_a
 // format=mti addressradix=d dataradix=b version=1.0 wordsperline=1
 <<<<<<< HEAD
+<<<<<<< HEAD
     0: 0000011111010000
     1: 0111010100110000
     2: 0001101101011000
@@ -11,10 +12,17 @@
 =======
     0: 0000000000000001
     1: 0000000000000001
+=======
+    0: 0000000000000000
+    1: 0000000000000000
+>>>>>>> upstream/master
     2: 0000000000000000
     3: 0000000000000000
     4: 0000000000000000
     5: 0000000000000000
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
 >>>>>>> upstream/master
     6: 0000000000000000
     7: 0000000000000000

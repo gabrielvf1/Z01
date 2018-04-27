@@ -90,7 +90,10 @@ architecture arch of CPU is
   signal s_loadD: STD_LOGIC;
   signal s_loadS: STD_LOGIC;
   signal s_loadPC: STD_LOGIC;
+<<<<<<< HEAD
   signal s_loadM: STD_LOGIC;
+=======
+>>>>>>> upstream/master
 
   signal s_zr: std_logic := '0';
   signal s_ng: std_logic := '0';
@@ -106,6 +109,7 @@ architecture arch of CPU is
 
 begin
 
+<<<<<<< HEAD
 
 
 con_unit : ControlUnit port map (instruction,s_zr,s_ng,s_muxALUI_A,s_muxAM_ALU,s_muxSD_ALU,s_zx,s_nx,s_zy,s_ny,s_f,s_no,s_loadA,s_loadD,s_loadS,s_loadM,s_loadPC);
@@ -134,4 +138,6 @@ addressM <= s_regAout(14 downto 0);
 
 
 
+=======
+>>>>>>> upstream/master
 end architecture;

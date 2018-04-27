@@ -15,7 +15,10 @@ end entity;
 architecture rtl of inversor16 is
 
 begin
+<<<<<<< HEAD
   y <= a when z = '0' 
   else not a;
+=======
+>>>>>>> upstream/master
 
 end architecture;

@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 -- by Luciano Soares
 -- BinaryDigit.vhd
 
 Library ieee;
 use ieee.std_logic_1164.all;
 
+=======
+-- Elementos de Sistemas
+-- by Luciano Soares
+-- BinaryDigit.vhd
+
+Library ieee; 
+use ieee.std_logic_1164.all;
+  
+>>>>>>> upstream/master
 entity BinaryDigit is
 	port(
 		clock:   in STD_LOGIC;
@@ -12,6 +22,7 @@ entity BinaryDigit is
 		output: out STD_LOGIC
 	);
 end entity;
+<<<<<<< HEAD
 
 architecture fds of BinaryDigit is
 
@@ -42,3 +53,5 @@ begin
   output <= o;
 
 end architecture;
+=======
+>>>>>>> upstream/master

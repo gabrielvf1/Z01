@@ -43,7 +43,10 @@ end entity;
 
 architecture  rtl OF alu IS
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
 	component zerador16 IS
 		port(z   : in STD_LOGIC;
 			 a   : in STD_LOGIC_VECTOR(15 downto 0);
@@ -91,6 +94,7 @@ architecture  rtl OF alu IS
 		);
 	end component;
 
+<<<<<<< HEAD
 		SIGNAL zxout,zyout,nxout,nyout,andout,adderout,muxout,precomp: std_logic_vector(15 downto 0);
 		--signal x : std_logic_vector(15 downto 0) := x"0073"; -- 163
 		--signal y : std_logic_vector(15 downto 0) := x"005F"; -- 95
@@ -114,3 +118,10 @@ pcomp : comparador16 port map(saida,zr,ng);
 
 end architecture;
 
+=======
+   SIGNAL zxout,zyout,nxout,nyout,andout,adderout,muxout,precomp: std_logic_vector(15 downto 0);
+
+begin
+
+end architecture;
+>>>>>>> upstream/master

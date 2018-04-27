@@ -5,6 +5,7 @@
 
 ; Calcula o fatorial do número em R0 e armazena o valor em R1.
 
+<<<<<<< HEAD
 
 
 leaw $R0, %A
@@ -89,3 +90,5 @@ movw %S, (%A)
 
 
 END:
+=======
+>>>>>>> upstream/master

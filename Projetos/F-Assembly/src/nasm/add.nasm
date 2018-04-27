@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ; Arquivo: Abs.nasm
 ; Curso: Elementos de Sistemas
 ; Criado por: Luciano Soares
@@ -13,6 +14,16 @@ addw (%A),%D,%S
 leaw $R2, %A
 movw %S, (%A)
 
+=======
+; Arquivo: add.nasm
+; Curso: Elementos de Sistemas
+; Criado por: Luciano Soares
+; Data: 27/03/2017
+; 2018 @ Rafael Corsi
+
+; Adicione o valor de RAM[1] com RAM[0] gravando em RAM[2].
+
+>>>>>>> upstream/master
 =======
 ; Arquivo: add.nasm
 ; Curso: Elementos de Sistemas

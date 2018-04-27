@@ -13,6 +13,7 @@ entity Register8 is
 		output: out STD_LOGIC_VECTOR(7 downto 0)
 	);
 end entity;
+<<<<<<< HEAD
 
 architecture arch of Register8 is
   component BinaryDigit is
@@ -34,3 +35,5 @@ begin
 	binary7: BinaryDigit PORT MAP (clock,input(6),load,output(6));
 	binary8: BinaryDigit PORT MAP (clock,input(7),load,output(7));
 end architecture;
+=======
+>>>>>>> upstream/master

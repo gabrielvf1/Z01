@@ -25,6 +25,7 @@ component FullAdder is
 	);
 end component;
 
+<<<<<<< HEAD
 signal C : STD_LOGIC_VECTOR(15 downto 0);
 
 begin
@@ -45,4 +46,8 @@ begin
     add14: FullAdder PORT MAP ( a(14), b(14), C(13), q(14), C(14));
     add15: FullAdder PORT MAP ( a(15), b(15), C(14), q(15), C(15));
  
+=======
+begin
+
+>>>>>>> upstream/master
 end architecture;

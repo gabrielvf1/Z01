@@ -18,11 +18,17 @@ if __name__ == "__main__":
     root = os.getcwd()
     os.chdir(SIMULATOR)
 <<<<<<< HEAD
+<<<<<<< HEAD
     os.system('py main.py')
 =======
+=======
+>>>>>>> upstream/master
 
     # tenta detectar a versão do python do sistema
     # se python2 for a padrão, forca a execucao
     # com python 3
     os.system('python main.py')
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
 >>>>>>> upstream/master

@@ -13,6 +13,7 @@ entity Register32 is
 		output: out STD_LOGIC_VECTOR(31 downto 0)
 	);
 end entity;
+<<<<<<< HEAD
 architecture arch of Register32 is
   component Register16 is
 	port(
@@ -27,3 +28,5 @@ architecture arch of Register32 is
   r2: Register16 Port Map (clock,input(31 downto 16),load,output(31 downto 16));
   end architecture;
 
+=======
+>>>>>>> upstream/master

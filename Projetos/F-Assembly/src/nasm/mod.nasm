@@ -5,6 +5,7 @@
 
 ; Divide o número posicionado na RAM[1] pelo número posicionado no RAM[2] e armazena o resultado na RAM[0].
 
+<<<<<<< HEAD
 leaw $R1,%A 
 movw (%A),%D
 leaw $R3,%A
@@ -56,3 +57,5 @@ movw %S,(%A)
 
 END:
 nop
+=======
+>>>>>>> upstream/master

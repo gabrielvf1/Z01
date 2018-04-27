@@ -9,6 +9,7 @@ entity Mux4Way is
 			d:   in  STD_LOGIC;
 			sel: in  STD_LOGIC_VECTOR(1 downto 0);
 			q:   out STD_LOGIC);
+<<<<<<< HEAD
 end Mux4Way;
 
 architecture rtl of Mux4Way is
@@ -18,3 +19,6 @@ begin
    		 c when sel = "10" 
    		 else d;
 end rtl;
+=======
+end entity;
+>>>>>>> upstream/master
