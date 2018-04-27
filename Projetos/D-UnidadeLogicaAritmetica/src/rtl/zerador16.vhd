@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
 -- Elementos de Sistemas
 -- by Luciano Soares
 -- zerador16.vhd
@@ -17,14 +13,8 @@ entity zerador16 is
 end zerador16;
 
 architecture rtl of zerador16 is
-<<<<<<< HEAD
 begin
 
 	y<=a when z='0' else "0000000000000000";
-=======
-
-
-begin
->>>>>>> upstream/master
 
 end architecture;

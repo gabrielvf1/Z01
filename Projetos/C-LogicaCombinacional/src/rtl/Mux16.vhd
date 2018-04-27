@@ -7,7 +7,6 @@ entity Mux16 is
 			b:   in  STD_LOGIC_VECTOR(15 downto 0);
 			sel: in  STD_LOGIC;
 			q:   out STD_LOGIC_VECTOR(15 downto 0));
-<<<<<<< HEAD
 end Mux16;
 
 architecture rtl of Mux16 is
@@ -15,6 +14,3 @@ begin
 	q <= a when sel='0'
          else b;
 end rtl;
-=======
-end entity;
->>>>>>> upstream/master

@@ -5,8 +5,6 @@
 
 ; Eleva ao quadrado o valor da RAM[1] e armazena o resultado na RAM[0].
 ; Só funciona com números positivos
-
-<<<<<<< HEAD
 leaw $R1, %A
 movw (%A), %D
 leaw $R2, %A
@@ -37,5 +35,3 @@ leaw $R2, %A
 subw (%A), %D,%S
 leaw $R0, %A
 movw %S, (%A)
-=======
->>>>>>> upstream/master

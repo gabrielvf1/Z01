@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿# Testes a serem executados
-=======
 # Testes a serem executados
->>>>>>> upstream/master
 # Descomente os módulos que deseja testar
 
 FullAdder.vhd

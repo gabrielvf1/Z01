@@ -31,11 +31,7 @@ add wave -position end sim:/computador_tb/c1/MAIN_CPU/*
 # Executa simulação
 ################################
 
-<<<<<<< HEAD
-run 1010 ns
-=======
 run 10000 ns
->>>>>>> upstream/master
 
 ################################
 # Exporta resultado (list)

@@ -11,7 +11,6 @@
 ; RAM[1] = RAM[0]
 ; RAM[3] = 1
 
-<<<<<<< HEAD
 leaw $R1,%A
 movw (%A),%D
 
@@ -30,11 +29,3 @@ movw %A,%D
 leaw $R3,%A
 movw %D,(%A)
 
-
-
-
-
-
-
-=======
->>>>>>> upstream/master

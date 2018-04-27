@@ -1,24 +1,11 @@
--- Elementos de Sistemas
--- by Luciano Soares
-<<<<<<< HEAD
--- Ram64.vhd
-=======
--- Ram4K.vhd
->>>>>>> upstream/master
 
 Library ieee; 
 use ieee.std_logic_1164.all;
-  
-<<<<<<< HEAD
 entity Ram4k is
-=======
-entity Ram4K is
->>>>>>> upstream/master
 	port(
 		clock:   in  STD_LOGIC;
 		input:   in  STD_LOGIC_VECTOR(15 downto 0);
 		load:    in  STD_LOGIC;
-<<<<<<< HEAD
 		address: in  STD_LOGIC_VECTOR( 11 downto 0);
 		output:  out STD_LOGIC_VECTOR(15 downto 0)
 	);
@@ -115,9 +102,3 @@ begin
 		address_big,output);
 
 end architecture;
-=======
-		address: in  STD_LOGIC_VECTOR(11 downto 0);
-		output:  out STD_LOGIC_VECTOR(15 downto 0)
-	);
-end entity;
->>>>>>> upstream/master

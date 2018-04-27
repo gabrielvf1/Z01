@@ -1,10 +1,4 @@
--- Elementos de Sistemas
--- by Luciano Soares
-<<<<<<< HEAD
--- Ram64.vhd
-=======
--- Ram512.vhd
->>>>>>> upstream/master
+
 
 Library ieee; 
 use ieee.std_logic_1164.all;
@@ -18,7 +12,6 @@ entity Ram512 is
 		output:  out STD_LOGIC_VECTOR(15 downto 0)
 	);
 end entity;
-<<<<<<< HEAD
 
 architecture arch of Ram512 is
 
@@ -111,5 +104,3 @@ begin
 		address_big,output);
 
 end architecture;
-=======
->>>>>>> upstream/master

@@ -1,13 +1,3 @@
-; Arquivo: Factorial.nasm
-; Curso: Elementos de Sistemas
-; Criado por: Luciano Soares
-; Data: 27/03/2017
-
-; Calcula o fatorial do número em R0 e armazena o valor em R1.
-
-<<<<<<< HEAD
-
-
 leaw $R0, %A
 movw (%A), %D
 ;              SE FOR 0 OU 1
@@ -90,5 +80,3 @@ movw %S, (%A)
 
 
 END:
-=======
->>>>>>> upstream/master

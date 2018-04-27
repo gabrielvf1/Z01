@@ -10,7 +10,6 @@ entity Ram8 is
 		clock:   in  STD_LOGIC;
 		input:   in  STD_LOGIC_VECTOR(15 downto 0);
 		load:    in  STD_LOGIC;
-<<<<<<< HEAD
 		address: in  STD_LOGIC_VECTOR(2 downto 0);
 		output:  out STD_LOGIC_VECTOR(15 downto 0)
 	);
@@ -105,9 +104,4 @@ begin
 
 
 end architecture;
-=======
-		address: in  STD_LOGIC_VECTOR( 2 downto 0);
-		output:  out STD_LOGIC_VECTOR(15 downto 0)
-	);
-end entity;
->>>>>>> upstream/master
+

@@ -13,7 +13,6 @@ entity Register16 is
 		output: out STD_LOGIC_VECTOR(15 downto 0)
 	);
 end entity;
-<<<<<<< HEAD
 architecture arch of Register16 is
   component Register8 is
 	port(
@@ -27,7 +26,3 @@ architecture arch of Register16 is
   r1: Register8 Port Map (clock,input(7 downto 0),load,output(7 downto 0));
   r2: Register8 Port Map (clock,input(15 downto 8),load,output(15 downto 8));
   end architecture;
-
-  
-=======
->>>>>>> upstream/master

@@ -23,8 +23,6 @@ component HalfAdder is
 		soma,vaium: out STD_LOGIC   -- sum e carry
 	);
 end component;
-
-<<<<<<< HEAD
 signal B : STD_LOGIC_VECTOR(15 downto 0);
 
 begin
@@ -44,9 +42,4 @@ begin
 	halfadd13 : HalfAdder PORT MAP (a(13), B(12), q(13), B(13));
 	halfadd14 : HalfAdder PORT MAP (a(14), B(13), q(14), B(14));
 	halfadd15 : HalfAdder PORT MAP (a(15), B(14), q(15), B(15));
-
-=======
-begin
->>>>>>> upstream/master
-
 end architecture;
