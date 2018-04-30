@@ -5,13 +5,23 @@
 
 package assembler;
 
+import java.awt.List;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * Encapsula o código de leitura. Carrega as instruções na linguagem assembly,
  * analisa, e oferece acesso as partes da instrução  (campos e símbolos).
  * Além disso, remove todos os espaços em branco e comentários.
  */
 public class Parser {
+	
 
+	public ArrayList<String> parser_content;
+	public int instruction_index = 0;
     /** Enumerator para os tipos de comandos do Assembler. */
     public enum CommandType {
         A_COMMAND,      // comandos LEA, que armazenam no registrador A
@@ -22,9 +32,33 @@ public class Parser {
     /**
      * Abre o arquivo de entrada NASM e se prepara para analisá-lo.
      * @param file arquivo NASM que será feito o parser.
+     * @throws IOException 
      */
-    public Parser(String file) {
+    public Parser(String file) throws IOException {
+    	BufferedReader parser_file = new BufferedReader(new FileReader(file));
+    	String line;
+    	parser_content = new ArrayList<String>();
+    	
+    	while ((line = parser_file.readLine()) != null) {
+    				if (line.contains(";")){
+    					line = line.substring(0,line.indexOf(';'));	    				
+    				}   									   	 
+    			
+    			while(line.startsWith(" ")){
+    				line = line.substring(1);
+    			}
+    			while(line.endsWith(" ")){
+    				line = line.substring(0,line.length()-1);
+    			}
+        		if (line.isEmpty() == false){
+        			parser_content.add(line);
+        		} 		
+    	}
+  
+    	parser_file.close();
+    	
 
+    	
     }
 
     /**
@@ -34,7 +68,12 @@ public class Parser {
      * @return Verdadeiro se ainda há instruções, Falso se as instruções terminaram.
      */
     public Boolean advance() {
-    	return null;
+//    	System.out.println(instruction_index);
+//    	System.out.println(parser_content.size());
+    	
+    	instruction_index +=1;
+    	boolean resp =!(instruction_index -1  == parser_content.size());
+    	return resp;
     }
 
     /**
@@ -42,7 +81,10 @@ public class Parser {
      * @return a instrução atual para ser analilisada
      */
     public String command() {
-    	return null;
+//    	System.out.println(parser_content);
+    	String command = parser_content.get(instruction_index-1);
+//    	System.out.println(parser_content.get(instruction_index-1).charAt(0));
+    	return command;
     }
 
     /**
@@ -54,7 +96,21 @@ public class Parser {
      * @return o tipo da instrução.
      */
     public CommandType commandType(String command) {
-    	return null;
+    	String[] parts = command.split(" ");
+    	
+    	if (parts[0].equals("leaw")){
+    		return Parser.CommandType.A_COMMAND;
+    		
+    	}else{
+    		
+    		if (command.charAt(command.length()-1) == ':'){  			
+    			return Parser.CommandType.L_COMMAND;
+    			
+    		}else{   			
+    			return Parser.CommandType.C_COMMAND;
+    		}
+    	}
+    	
     }
 
     /**
@@ -64,7 +120,10 @@ public class Parser {
      * @return somente o símbolo ou o valor número da instrução.
      */
     public String symbol(String command) {
-    	return null;
+    	int comeca = command.indexOf('$');
+    	int termina = command.indexOf(',');
+    	return command.substring(comeca+1, termina);
+    	
     }
 
     /**
@@ -74,7 +133,7 @@ public class Parser {
      * @return o símbolo da instrução (sem os dois pontos).
      */
     public String label(String command) {
-    	return null;
+    	return command.substring(0, command.length()-1);
     }
 
     /**
@@ -84,7 +143,8 @@ public class Parser {
      * @return um vetor de string contento os tokens da instrução (as partes do comando).
      */
     public String[] instruction(String command) {
-    	return null;
+    	String [] mnemnonic = command.split(" |\\,");
+    	return mnemnonic;
     }
 
 }
