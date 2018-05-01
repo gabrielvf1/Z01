@@ -45,6 +45,15 @@ public class Assemble {
      * Dependencia : Parser, SymbolTable
      */
     public void fillSymbolTable() throws FileNotFoundException, IOException {
+    	Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
+    	
+    	while (parser.advance()){
+    		if (parser.commandType(parser.command()) == Parser.CommandType.L_COMMAND){
+    			String label_to_add = parser.label(parser.command());
+    			table.addEntry(label_to_add, parser.instruction_index);
+    		}
+    	}
+    	
     }
 
     /**
@@ -56,6 +65,40 @@ public class Assemble {
      */
     public void generateMachineCode() throws FileNotFoundException, IOException{
         Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
+        
+        while (parser.advance()){
+        	String bit_15 = "0";
+        	String machine_code = "";
+        	String binary = "";
+    		if (parser.commandType(parser.command()) == Parser.CommandType.A_COMMAND){
+    			if (table.contains(parser.symbol(parser.command()))){
+    				binary =Code.toBinary( String.valueOf(table.getAddress(parser.symbol(parser.command()))));
+    				machine_code = bit_15 + binary;
+    				outHACK.write(machine_code);
+    			}else{
+    				int i=0;
+    				while (!table.containsValue(i)){
+    					i++;
+    				}
+    				
+    				i -= 1; //arruma uma soma a mais
+    				table.addEntry(parser.symbol(parser.command()), i);
+    				binary =Code.toBinary(String.valueOf(i));
+    				machine_code = bit_15 + binary;
+    				outHACK.write(machine_code);
+    			
+    			}
+
+    			
+    		}else{
+//    			commando tipo C
+    			bit_15 = "1";
+    			binary = Code.comp( parser.instruction(parser.command())) + Code.dest( parser.instruction(parser.command())) + Code.jump( parser.instruction(parser.command()));
+				machine_code = bit_15 + binary;
+				outHACK.write(machine_code);
+    		}
+    	}
+        
 
     }
 
