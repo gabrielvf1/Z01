@@ -12,12 +12,8 @@ entity Nor8Way is
 			g:   in  STD_LOGIC;
 			h:   in  STD_LOGIC;
 			q:   out STD_LOGIC);
-<<<<<<< HEAD
 end Nor8Way;
 architecture rtl  of Nor8Way is 
 begin
 	q <= not (a or b or c or d or e or f or g or h);
 end rtl; 
-=======
-end entity;
->>>>>>> upstream/master

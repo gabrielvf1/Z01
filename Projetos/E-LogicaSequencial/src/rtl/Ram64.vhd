@@ -14,7 +14,6 @@ entity Ram64 is
 		output:  out STD_LOGIC_VECTOR(15 downto 0)
 	);
 end entity;
-<<<<<<< HEAD
 
 architecture arch of Ram64 is
 
@@ -110,5 +109,3 @@ begin
 		address_big,output);
 
 end architecture;
-=======
->>>>>>> upstream/master

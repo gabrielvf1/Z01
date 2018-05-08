@@ -4,13 +4,10 @@
 ; Data: 27/03/2017
 
 ; faz uma subtracao binaria do valor de :  RAM[1] - RAM[0] gravando em RAM[2].
-
-<<<<<<< HEAD
 leaw $R1,%A
 movw (%A), %D
 leaw %R0,%A
 subw %D,(%A),%S
 leaw $R2, %A
 movw %S, (%A)
-=======
->>>>>>> upstream/master
+

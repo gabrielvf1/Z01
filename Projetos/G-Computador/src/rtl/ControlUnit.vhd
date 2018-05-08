@@ -23,8 +23,6 @@ end entity;
 
 architecture arch of ControlUnit is
 begin
-
-<<<<<<< HEAD
 zx <= instruction(15) and instruction(12); 
 nx <= instruction(15) and instruction(11);
 zy <= instruction(15) and instruction(10);
@@ -44,6 +42,4 @@ loadM <= instruction(3) and instruction(15);
 loadPC <= ((instruction(2) and ng) or (instruction(1) and zr) or (instruction(0) and not(ng) and not(zr)) or (instruction(0) and instruction(1) and instruction(2))) and instruction(15);
 
 
-=======
->>>>>>> upstream/master
 end architecture;
