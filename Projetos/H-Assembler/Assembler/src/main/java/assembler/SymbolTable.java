@@ -41,10 +41,6 @@ public class SymbolTable {
     	Table.put("ARG",2);
     	Table.put("THIS",3);
     	Table.put("THAT",4);
-
-
-
-
     }
 
     /**
@@ -64,8 +60,26 @@ public class SymbolTable {
      */
     public Boolean contains(String symbol) {
     	
-    	return Table.containsKey(symbol);
-    }
+    	boolean existe=Table.containsKey(symbol);
+    	if (existe) {
+        	return true;
+   	    } 
+    	else {
+   	       return false;
+    	    }
+    	}
+    
+    public Boolean containsValue(int symbol) {
+    	
+    	boolean existe=Table.containsValue(symbol);
+    	if (existe) {
+        	return true;
+   	    } 
+    	else {
+   	       return false;
+    	    }
+    	}
+    
 
     /**
      * Retorna o valor númerico associado a um símbolo já inserido na tabela de símbolos.
@@ -73,16 +87,7 @@ public class SymbolTable {
      * @return valor numérico associado ao símbolo procurado.
      */
     public Integer getAddress(String symbol) {
-    	
     	return Table.get(symbol);
-    	
-
     }
-
-	public boolean containsValue(int i) {
-		// TODO Auto-generated method stub
-		return Table.containsKey(i);
-	}
-
 
 }
