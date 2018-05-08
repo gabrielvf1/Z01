@@ -35,7 +35,11 @@ public class Code {
      * @return Opcode (String de 3 bits) com código em linguagem de máquina para a instrução.
      */
     public static String jump(String[] mnemnonic) {
-    	return null;
+    	String jumpBin = "";  	
+    	jumpBin = "111";
+    	
+    	return jumpBin;
+    	
     }
 
     /**
@@ -44,7 +48,28 @@ public class Code {
      * @return Valor em binário (String de 15 bits) representado com 0s e 1s.
      */
     public static String toBinary(String symbol) {
-    	return null;
+    	
+    	int Dec= Integer.parseInt(symbol);
+    	String Bin;
+    	
+    	if (Dec<32767){
+    		Bin=Integer.toBinaryString(Dec);
+   
+    		int Falta = 15-Bin.length();
+    		String complemento="";
+    		while (Falta != 0){
+    			complemento= complemento+"0";
+    			Falta -=1;
+    		}
+    		Bin=complemento+Bin;
+    	}
+    	else{
+    	System.out.println("ERRO: Tamanho do N�mero � superior a 15 bits");
+    	Bin="111111111111111";	
+    	
+    	}
+    	
+    	return Bin ;
     }
 
 }
