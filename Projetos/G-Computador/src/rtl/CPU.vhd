@@ -90,7 +90,7 @@ architecture arch of CPU is
   signal s_loadD: STD_LOGIC;
   signal s_loadS: STD_LOGIC;
   signal s_loadPC: STD_LOGIC;
-
+  signal s_loadM: STD_LOGIC;
   signal s_zr: std_logic := '0';
   signal s_ng: std_logic := '0';
   signal s_muxALUI_Aout: STD_LOGIC_VECTOR(15 downto 0);
@@ -104,5 +104,31 @@ architecture arch of CPU is
   signal s_pcout: STD_LOGIC_VECTOR(15 downto 0);
 
 begin
+
+con_unit : ControlUnit port map (instruction,s_zr,s_ng,s_muxALUI_A,s_muxAM_ALU,s_muxSD_ALU,s_zx,s_nx,s_zy,s_ny,s_f,s_no,s_loadA,s_loadD,s_loadS,s_loadM,s_loadPC);
+
+muxAlui : Mux16 port map(s_ALUout,instruction,s_muxALUI_A,s_muxALUI_Aout);
+
+reg_a : Register16 port map(clock,s_muxALUI_Aout,s_loadA,s_regAout);
+
+mux_am : Mux16 port map(s_regAout,inM,s_muxAM_ALU,s_muxAM_ALUout);
+
+
+reg_s : Register16 port map(clock,s_ALUout,s_loadS,s_regSout);
+reg_d : Register16 port map(clock,s_ALUout,s_loadD,s_regDout);
+mux_sd : Mux16 port map(s_regSout,s_regDout,s_muxSD_ALU,s_muxSDout);
+
+
+alu_port : ALU port map(s_muxAM_ALUout,s_muxSDout,s_zx,s_nx,s_zy,s_ny,s_f,s_no,s_zr,s_ng,s_ALUout);
+
+pc_port : pc port map (clock,'1',s_loadPC,reset,s_regAout,s_pcout);
+
+outM  <= s_ALUout;
+pcout <= s_pcout(14 downto 0);
+writeM <= s_loadM;
+addressM <= s_regAout(14 downto 0);
+
+
+
 
 end architecture;
