@@ -63,8 +63,8 @@ ARCHITECTURE logic OF Computador IS
 	component MemoryIO is
 		PORT(
 			  -- Sistema
-        CLK_SLOW : IN  STD_LOGIC;
-        CLK_FAST : IN  STD_LOGIC;
+		      CLK_SLOW : IN  STD_LOGIC;
+		      CLK_FAST : IN  STD_LOGIC;
 			  RST      : IN  STD_LOGIC;
 
 			  -- RAM 16K
@@ -102,7 +102,6 @@ ARCHITECTURE logic OF Computador IS
   SIGNAL INPUT        : STD_LOGIC_VECTOR(15 downto 0) := "1111111111111111";
   SIGNAL ADDRESS      : STD_LOGIC_VECTOR(14 downto 0) := (others => '0') ; -- meio 00100101101010
   SIGNAL LOAD         : STD_LOGIC := '0';
-  SIGNAL LCD_INIT_OK  : STD_LOGIC;
 
   SIGNAL CLK_FAST           : STD_LOGIC;
   SIGNAL CLK_SLOW           : STD_LOGIC;
@@ -112,7 +111,11 @@ ARCHITECTURE logic OF Computador IS
 
   SIGNAL OUTPUT_RAM   : STD_LOGIC_VECTOR(15 downto 0);
   SIGNAL INSTRUCTION  : STD_LOGIC_VECTOR(15 downto 0);
-  SIGNAL PC			      : STD_LOGIC_VECTOR(14 downto 0);
+  SIGNAL PC			  : STD_LOGIC_VECTOR(14 downto 0);
+  SIGNAL writeM   : STD_LOGIC;
+  SIGNAL addressM : STD_LOGIC_VECTOR(14 downto 0);
+  signal saidaROM, OUTPUT  : STD_LOGIC_VECTOR(15 downto 0);
+  SIGNAL LCD_INIT_OK  : STD_LOGIC;
 
 
 BEGIN
@@ -126,8 +129,41 @@ BEGIN
      );
 
 
+	ROM: ROM32K PORT MAP (address => PC , clock => CLK_SLOW , q => INSTRUCTION );
+
+
+	MAIN_CPU: CPU PORT MAP (
+		clock => CLK_SLOW ,
+		inM => OUTPUT_RAM ,
+		instruction => INSTRUCTION ,
+		reset => RST_CPU ,
+		outM => INPUT ,
+		writeM => LOAD,
+		addressM => ADDRESS ,
+		pcout => PC );
+	
+
+	MEMORY_MAPED: MemoryIO PORT MAP (
+		CLK_SLOW => CLK_SLOW ,
+		CLK_FAST => CLK_FAST ,
+		RST => RST_MEM ,
+		ADDRESS => ADDRESS ,
+		INPUT => INPUT ,
+		LOAD => LOAD,
+		OUTPUT => OUTPUT_RAM ,
+		LCD_CS_N => LCD_CS_N ,
+		LCD_D => LCD_D, 
+		LCD_RD_N => LCD_RD_N ,
+		LCD_RESET_N => LCD_RESET_N ,
+		LCD_RS => LCD_RS ,
+		LCD_WR_N => LCD_WR_N ,
+		LCD_ON => LCD_ON ,
+		LCD_INIT_OK => LCD_INIT_OK ,
+		SW => SW , 
+		LED => LEDR );
+
   -- Resets
-  RST_CPU <= RESET or (not LCD_INIT_OK) or (not PLL_LOCKED); -- REINICIA CPU
+ 	RST_CPU <= RESET or (not LCD_INIT_OK) or (not PLL_LOCKED); -- REINICIA CPU
 	RST_MEM <= RESET or (not PLL_LOCKED);                      -- REINICIA MemoryIO
 	RESET   <= NOT RESET_N;
 
