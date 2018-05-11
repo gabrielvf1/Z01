@@ -47,4 +47,4 @@ script:
   #- python Projetos/D-UnidadeLogicaAritmetica/script/testULA.py
   #- python Projetos/E-LogicaSequencial/script/testeLogicaSequencial.py
   #- python Projetos/F-Assembly/script/testeAssembly.py
-  - python Projetos/I-VM/scripts/testeAssembly.py
+  - python Projetos/I-VM/scripts/testeVm.py
