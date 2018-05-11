@@ -50,7 +50,9 @@ public class Assemble {
     	while (parser.advance()){
     		if (parser.commandType(parser.command()) == Parser.CommandType.L_COMMAND){
     			String label_to_add = parser.label(parser.command());
+    			//parser.instruction_index-=1;
     			table.addEntry(label_to_add, parser.instruction_index);
+    			
     		}
     	}
     	
@@ -63,6 +65,7 @@ public class Assemble {
      *
      * Dependencias : Parser, Code
      */
+    
     public void generateMachineCode() throws FileNotFoundException, IOException{
         Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
         
@@ -70,24 +73,43 @@ public class Assemble {
         	String bit_15 = "0";
         	String machine_code = "";
         	String binary = "";
+        	
+        	
     		if (parser.commandType(parser.command()) == Parser.CommandType.A_COMMAND){
-    			if (table.contains(parser.symbol(parser.command()))){
-    				binary =Code.toBinary( String.valueOf(table.getAddress(parser.symbol(parser.command()))));
-    				machine_code = bit_15 + binary;
-    				outHACK.println(machine_code);
-    				
-    			}else{
-    				int i=0;
-    				while (!table.containsValue(i)){
-    					i++;
-    				}
-    				
-    				//i -= 1; //arruma uma soma a mais
-    				table.addEntry(parser.symbol(parser.command()), i);
-    				binary =Code.toBinary(String.valueOf(i));
-    				machine_code = bit_15 + binary;
-    				outHACK.println(machine_code);
+    			String comando = parser.command();
+    			String simbolo = parser.symbol(comando);
+    			int simbolo_int = -1;
+    			try {  
+    		         simbolo_int = Integer.parseInt(simbolo);  
+    		         
+    		      } catch (NumberFormatException e) {  
+    		         
+    		      }  
     			
+    			if(simbolo_int !=-1){
+    				binary =Code.toBinary( String.valueOf(simbolo_int));
+    				machine_code = bit_15 + binary;
+    				outHACK.println(machine_code);
+    			}else{
+	    			if (table.contains(simbolo)){  				
+	    				binary =Code.toBinary( String.valueOf(table.getAddress(parser.symbol(parser.command()))));
+	    				machine_code = bit_15 + binary;
+	    				outHACK.println(machine_code);
+	    				
+	    			}else{
+	    				
+	    				int i=0;
+	    				while (!table.containsValue(i)){
+	    					i++;
+	    				}
+	    				
+	    				//i -= 1; //arruma uma soma a mais
+	    				table.addEntry(parser.symbol(parser.command()), i);
+	    				binary =Code.toBinary(String.valueOf(i));
+	    				machine_code = bit_15 + binary;
+	    				outHACK.println(machine_code);
+	    			
+	    			}
     			}
 
     			

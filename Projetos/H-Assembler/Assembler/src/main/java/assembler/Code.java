@@ -22,6 +22,24 @@ public class Code {
     		return "0000";
     	}  	
     	
+    	if (mnemnonic[0] == "jg"){
+    		return "0000";
+    	} else if ( mnemnonic[0].equals("je")){
+    		return "0000";
+    	} else if ( mnemnonic[0].equals("jge")){
+    		return "0000";
+    	} else if ( mnemnonic[0].equals("jl")){
+    		return "0000";
+    	} else if ( mnemnonic[0].equals("jne")){
+    		return "0000";
+    	} else if ( mnemnonic[0].equals("jle")){
+    		return "0000";
+    	} else if ( mnemnonic[0].equals("jmp")){
+    		return "0000";
+    	}
+    	
+    	
+    	
     	if (mnemnonic.length == 2){
     		switch(mnemnonic[1]){	
 	    		case "%A" : d3 = "1";break;
@@ -199,19 +217,19 @@ public class Code {
      * @return Opcode (String de 3 bits) com código em linguagem de máquina para a instrução.
      */
     public static String jump(String[] mnemnonic) {
-      	if (mnemnonic[0] == "jg"){
+      	if (mnemnonic[0].equals("jg")){
     		return "001";
-    	} else if ( mnemnonic[0] == "je"){
+    	} else if ( mnemnonic[0].equals("je")){
     		return "010";
-    	} else if ( mnemnonic[0] == "jge"){
+    	} else if ( mnemnonic[0].equals("jge")){
     		return "011";
-    	} else if ( mnemnonic[0] == "jl"){
+    	} else if ( mnemnonic[0].equals("jl")){
     		return "100";
-    	} else if ( mnemnonic[0] == "jne"){
+    	} else if ( mnemnonic[0].equals("jne")){
     		return "101";
-    	} else if ( mnemnonic[0] == "jle"){
+    	} else if ( mnemnonic[0].equals("jle")){
     		return "110";
-    	} else if ( mnemnonic[0] == "jmp"){
+    	} else if ( mnemnonic[0].equals("jmp")){
     		return "111";
     	} else {
     		return "000";

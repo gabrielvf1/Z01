@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import assembler.Parser.CommandType;
+
 /**
  * Encapsula o código de leitura. Carrega as instruções na linguagem assembly,
  * analisa, e oferece acesso as partes da instrução  (campos e símbolos).
@@ -69,11 +71,15 @@ public class Parser {
      * entrada o método retorna "Falso", senão retorna "Verdadeiro".
      * @return Verdadeiro se ainda há instruções, Falso se as instruções terminaram.
      */
-    public Boolean advance() {
+    public boolean advance() {
 //    	System.out.println(instruction_index);
 //    	System.out.println(parser_content.size());
+
+    		instruction_index +=1;
     	
-    	instruction_index +=1;
+    	
+    	
+    	
     	boolean resp =!(instruction_index -1  == parser_content.size());
     	return resp;
     }
@@ -122,9 +128,18 @@ public class Parser {
      * @return somente o símbolo ou o valor número da instrução.
      */
     public String symbol(String command) {
-    	int comeca = command.indexOf('$');
-    	int termina = command.indexOf(',');
-    	return command.substring(comeca+1, termina);
+		int index_remove_command = command.indexOf(' ');
+    	command = command.substring(index_remove_command+1);
+    	
+    	if(command.charAt(0)=='$'){	    		
+	    	int comeca = command.indexOf('$');
+	    	int termina = command.indexOf(',');
+	    	return command.substring(comeca+1, termina);
+    	}else{
+    		int comeca = command.indexOf('%');
+    		int termina = command.indexOf(',');
+    		return command.substring(comeca+1, termina);
+    	}
     	
     }
 
@@ -156,5 +171,7 @@ public class Parser {
     	
     	return mnemnonic;
     }
+
+	
 
 }

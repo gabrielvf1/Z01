@@ -12,6 +12,7 @@ import java.util.Map;
  * Mantém uma tabela com a correspondência entre os rótulos simbólicos e endereços numéricos de memória.
  */
 public class SymbolTable {
+	public int labels_num = -1;
 	public Map<String, Integer> Table;
     /**
      * Cria a tabela de símbolos.
@@ -49,8 +50,8 @@ public class SymbolTable {
      * @param  address símbolo a ser armazenado na tabela de símbolos.
      */
     public void addEntry(String symbol, int address) {
-    	Table.put(symbol, address);
-    	
+    	Table.put(symbol, address-labels_num);
+    	labels_num+=1;
     }
 
     /**
