@@ -26,4 +26,4 @@ StackTest 1 4000
 BasicLoop 1 4000
 SimpleFunction 1 500
 StaticsTest 1 5000
-Mult 1 1000
+#Mult 1 1000
