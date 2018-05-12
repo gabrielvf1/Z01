@@ -24,7 +24,7 @@ while1:
 	subw (%A), %D,%S
 
 
-	leaw %while1, %A
+	leaw $while1, %A
 	jne %S
 	nop
 
