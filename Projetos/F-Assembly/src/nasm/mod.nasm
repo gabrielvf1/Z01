@@ -6,7 +6,6 @@ leaw $R2,%A
 movw (%A),%D ; d com valor de R1
 leaw $R4,%A
 movw %D,(%A) ; R1 em R4
-
 while1:
 	leaw $R3, %A
 	movw (%A),%D
@@ -19,20 +18,15 @@ while1:
 	incw %D
 	leaw $R5,%A
 	movw %D,(%A)
-
 	leaw $RESULT0,%A
 	je %S
 	nop
-
 	leaw $RESULTNEG,%A
 	jl %S
 	nop
-
-	leaw %while1,%A
+	leaw $while1,%A
 	jmp
 	nop
-
-
 RESULTNEG:
 leaw $R2, %A
 addw %S,(%A),%D
