@@ -6,23 +6,27 @@
 package assembler;
 
 /**
- * Traduz mnemônicos da linguagem assembly para códigos binários da arquitetura Z0.
+ * Traduz mnemÃ´nicos da linguagem assembly para cÃ³digos binÃ¡rios da arquitetura Z0.
  */
 public class Code {
 
     /**
-     * Retorna o código binário do(s) registrador(es) que vão receber o valor da instrução.
-     * @param  mnemnonic[0] vetor de mnemônicos "instrução" a ser analisada.
-     * @return Opcode (String de 4 bits) com código em linguagem de máquina para a instrução.
+     * Retorna o cÃ³digo binÃ¡rio do(s) registrador(es) que vÃ£o receber o valor da instruÃ§Ã£o.
+     * @param  mnemnonic[0] vetor de mnemÃ´nicos "instruÃ§Ã£o" a ser analisada.
+     * @return Opcode (String de 4 bits) com cÃ³digo em linguagem de mÃ¡quina para a instruÃ§Ã£o.
      */
     public static String dest(String[] mnemnonic) {
     	String d3 = "0",d2 = "0",d1 = "0",d0 = "0";
+    	
+    	for(int i = 0;i<mnemnonic.length;i++){
+    		mnemnonic[i] = mnemnonic[i].replaceAll("\t", "");
+    	}
     	
     	if (mnemnonic[0] == "nop" || mnemnonic.length < 2){
     		return "0000";
     	}  	
     	
-    	if (mnemnonic[0] == "jg"){
+    	if (mnemnonic[0].equals("jg")){
     		return "0000";
     	} else if ( mnemnonic[0].equals("je")){
     		return "0000";
@@ -86,17 +90,18 @@ public class Code {
     }
 
     /**
-     * Retorna o código binário do mnemônico para realizar uma operação de cálculo.
-     * @param  mnemnonic[0] vetor de mnemônicos "instrução" a ser analisada.
-     * @return Opcode (String de 7 bits) com código em linguagem de máquina para a instrução.
+     * Retorna o cÃ³digo binÃ¡rio do mnemÃ´nico para realizar uma operaÃ§Ã£o de cÃ¡lculo.
+     * @param  mnemnonic[0] vetor de mnemÃ´nicos "instruÃ§Ã£o" a ser analisada.
+     * @return Opcode (String de 7 bits) com cÃ³digo em linguagem de mÃ¡quina para a instruÃ§Ã£o.
      */
     public static String comp(String[] mnemnonic) {
     	String bit14="0",bit13="0";
     	String bit_12to7="000000";
     	
-    	if(mnemnonic[0].contains("\t")){
-    		mnemnonic[0] = mnemnonic[0].replaceAll("\t", "");
+    	for(int i = 0;i<mnemnonic.length;i++){
+    		mnemnonic[i] = mnemnonic[i].replaceAll("\t", "");
     	}
+    	
     	
     	if (mnemnonic[0].equals("nop")){
     		return "00000000";
@@ -212,11 +217,14 @@ public class Code {
     }
 
     /**
-     * Retorna o código binário do mnemônico para realizar uma operação de jump (salto).
-     * @param  mnemnonic[0] vetor de mnemônicos "instrução" a ser analisada.
-     * @return Opcode (String de 3 bits) com código em linguagem de máquina para a instrução.
+     * Retorna o cÃ³digo binÃ¡rio do mnemÃ´nico para realizar uma operaÃ§Ã£o de jump (salto).
+     * @param  mnemnonic[0] vetor de mnemÃ´nicos "instruÃ§Ã£o" a ser analisada.
+     * @return Opcode (String de 3 bits) com cÃ³digo em linguagem de mÃ¡quina para a instruÃ§Ã£o.
      */
     public static String jump(String[] mnemnonic) {
+    	for(int i = 0;i<mnemnonic.length;i++){
+    		mnemnonic[i] = mnemnonic[i].replaceAll("\t", "");
+    	}
       	if (mnemnonic[0].equals("jg")){
     		return "001";
     	} else if ( mnemnonic[0].equals("je")){
@@ -238,9 +246,9 @@ public class Code {
     }
 
     /**
-     * Retorna o código binário de um valor decimal armazenado numa String.
-     * @param  symbol valor numérico decimal armazenado em uma String.
-     * @return Valor em binário (String de 15 bits) representado com 0s e 1s.
+     * Retorna o cÃ³digo binÃ¡rio de um valor decimal armazenado numa String.
+     * @param  symbol valor numÃ©rico decimal armazenado em uma String.
+     * @return Valor em binÃ¡rio (String de 15 bits) representado com 0s e 1s.
      */
 public static String toBinary(String symbol) {
     	
@@ -259,7 +267,7 @@ public static String toBinary(String symbol) {
     		Bin=complemento+Bin;
     	}
     	else{
-    	System.out.println("ERRO: Tamanho do Número é superior a 15 bits");
+    	System.out.println("ERRO: Tamanho do NÃºmero Ã© superior a 15 bits");
     	Bin="111111111111111";	
     	
     	}

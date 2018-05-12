@@ -13,61 +13,57 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Faz a geração do código gerenciando os demais módulos
+ * Faz a geraÃ§Ã£o do cÃ³digo gerenciando os demais mÃ³dulos
  */
 public class Assemble {
     private String inputFile;              // arquivo de entrada nasm
-    File hackFile = null;                  // arquivo de saída hack
-    private PrintWriter outHACK = null;    // grava saida do código de máquina em Hack
-    boolean debug;                         // flag que especifica se mensagens de debug são impressas
-    private SymbolTable table;             // tabela de símbolos (variáveis e marcadores)
+    File hackFile = null;                  // arquivo de saÃ­da hack
+    private PrintWriter outHACK = null;    // grava saida do cÃ³digo de mÃ¡quina em Hack
+    boolean debug;                         // flag que especifica se mensagens de debug sÃ£o impressas
+    private SymbolTable table;             // tabela de sÃ­mbolos (variÃ¡veis e marcadores)
 
     /**
-     * Retorna o código binário do mnemônico para realizar uma operação de cálculo.
-     * @param  mnemnonic vetor de mnemônicos "instrução" a ser analisada.
-     * @return Opcode (String de 7 bits) com código em linguagem de máquina para a instrução.
+     * Retorna o cÃ³digo binÃ¡rio do mnemÃ´nico para realizar uma operaÃ§Ã£o de cÃ¡lculo.
+     * @param  mnemnonic vetor de mnemÃ´nicos "instruÃ§Ã£o" a ser analisada.
+     * @return Opcode (String de 7 bits) com cÃ³digo em linguagem de mÃ¡quina para a instruÃ§Ã£o.
      */
     public Assemble(String inFile, String outFileHack, boolean debug) throws IOException {
         this.debug = debug;
         inputFile  = inFile;
-        hackFile   = new File(outFileHack);                      // Cria arquivo de saída .hack
-        outHACK    = new PrintWriter(new FileWriter(hackFile));  // Cria saída do print para
+        hackFile   = new File(outFileHack);                      // Cria arquivo de saÃ­da .hack
+        outHACK    = new PrintWriter(new FileWriter(hackFile));  // Cria saÃ­da do print para
                                                                  // o arquivo hackfile
         table      = new SymbolTable();                          // Cria e inicializa a tabela de simbolos
 
     }
 
     /**
-     * primeiro passo para a construção da tabela de símbolos de marcadores (labels)
-     * varre o código em busca de Símbolos novos Labels e Endereços de memórias
-     * e atualiza a tabela de símbolos com os endereços.
+     * primeiro passo para a construÃ§Ã£o da tabela de sÃ­mbolos de marcadores (labels)
+     * varre o cÃ³digo em busca de SÃ­mbolos novos Labels e EndereÃ§os de memÃ³rias
+     * e atualiza a tabela de sÃ­mbolos com os endereÃ§os.
      *
      * Dependencia : Parser, SymbolTable
      */
     public void fillSymbolTable() throws FileNotFoundException, IOException {
-    	Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
+    	Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o comeÃ§o
     	
-    	while (parser.advance()){
-    		if (parser.commandType(parser.command()) == Parser.CommandType.L_COMMAND){
-    			String label_to_add = parser.label(parser.command());
-    			//parser.instruction_index-=1;
-    			table.addEntry(label_to_add, parser.instruction_index);
-    			
-    		}
+    	for(int i = 0; i < parser.label_content.size();i++){
+    		String label = parser.label_content.get(i);
+    		String label_add = parser.label(label);
+    		table.addEntry(label_add,parser.label_indexes.get(i));
     	}
     	
     }
 
     /**
-     * Segundo passo para a geração do código de máquina
-     * Varre o código em busca de instruções do tipo A, C
-     * gerando a linguagem de máquina a partir do parse das instruções.
+     * Segundo passo para a geraÃ§Ã£o do cÃ³digo de mÃ¡quina
+     * Varre o cÃ³digo em busca de instruÃ§Ãµes do tipo A, C
+     * gerando a linguagem de mÃ¡quina a partir do parse das instruÃ§Ãµes.
      *
      * Dependencias : Parser, Code
      */
-    
     public void generateMachineCode() throws FileNotFoundException, IOException{
-        Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
+        Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o comeÃ§o
         
         while (parser.advance()){
         	String bit_15 = "0";
@@ -75,28 +71,30 @@ public class Assemble {
         	String binary = "";
         	
         	
+
     		if (parser.commandType(parser.command()) == Parser.CommandType.A_COMMAND){
-    			String comando = parser.command();
-    			String simbolo = parser.symbol(comando);
-    			int simbolo_int = -1;
-    			try {  
-    		         simbolo_int = Integer.parseInt(simbolo);  
-    		         
-    		      } catch (NumberFormatException e) {  
-    		         
-    		      }  
+    			String label = parser.symbol(parser.command());
+            	          
+				int label_int = -1;
+            	
+            	try {  
+                    label_int = Integer.parseInt(label);  
+                    
+                 } catch (NumberFormatException e) {}  
     			
-    			if(simbolo_int !=-1){
-    				binary =Code.toBinary( String.valueOf(simbolo_int));
+    			
+    			if(label_int!=-1){
+    				binary =Code.toBinary( String.valueOf(label_int));
     				machine_code = bit_15 + binary;
     				outHACK.println(machine_code);
     			}else{
-	    			if (table.contains(simbolo)){  				
+	    			if (table.contains(parser.symbol(parser.command()))){
 	    				binary =Code.toBinary( String.valueOf(table.getAddress(parser.symbol(parser.command()))));
 	    				machine_code = bit_15 + binary;
 	    				outHACK.println(machine_code);
 	    				
 	    			}else{
+	    				
 	    				
 	    				int i=0;
 	    				while (!table.containsValue(i)){
