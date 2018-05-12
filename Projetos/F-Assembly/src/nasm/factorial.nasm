@@ -3,7 +3,7 @@ movw (%A), %D
 ;              SE FOR 0 OU 1
 ;--------------------------------------------
 decw %D
-leaw $UM %A
+leaw $UM,%A
 jle %D
 nop
 
@@ -44,7 +44,7 @@ while1:
 		movw %S, (%A)
 
 
-		leaw %while2, %A
+		leaw $while2, %A
 		jg %S
 		nop
 
@@ -64,11 +64,11 @@ while1:
 	decw %S
 	leaw $R4, %A
 	movw %S, (%A)
-	leaw %END, %A
+	leaw $END, %A
 	jle %S
 	nop
 
-	leaw %while1, %A
+	leaw $while1, %A
 	jmp
 	nop
 

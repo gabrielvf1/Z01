@@ -24,7 +24,7 @@ WHILE:
 	incw %S
 	movw %S, (%A)
 	subw %D, (%A), %S
-	leaw %WHILE, %A
+	leaw $WHILE, %A
 	jne %S
 	nop
 leaw $R2, %A
