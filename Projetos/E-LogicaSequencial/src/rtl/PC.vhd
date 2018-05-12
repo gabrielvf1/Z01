@@ -33,23 +33,43 @@ component Inc16 is
 	);
 end component;
 
-signal inc: STD_LOGIC_VECTOR(15 downto 0);
-signal outp: STD_LOGIC_VECTOR(15 downto 0);
+component Register16 is
+    port(
+      clock:   in std_logic;
+      input:   in STD_LOGIC_VECTOR(15 downto 0);
+      load:    in std_logic;
+      output: out STD_LOGIC_VECTOR(15 downto 0)
+      );
+  end component;
+
+signal inc: STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+signal outp : STD_LOGIC_VECTOR(15 downto 0)  := (others => '0');
+signal inputR: STD_LOGIC_VECTOR(15 downto 0)  := (others => '0');
+signal loadR: STD_LOGIC := '0';
 
 begin
-bitincrementer: Inc16 Port Map(input,inc);
+bitincrementer: Inc16 Port Map(outp,inc);
+registrador: Register16 Port Map(clock,inputR,loadR,outp);
+
 	process(clock,reset,increment,load)
 	begin
-	if(reset = '1') then
-	output <= "0000000000000000";
-	elsif(rising_edge(clock)) then
-	if (load = '1') then 
-	output <= input;
-	elsif (increment = '1') then
-	output <= inc;
-	else
+
+		if(reset = '1') then
+			loadR <= '1';
+			inputR <= "0000000000000000";
+		else 
+			if (load = '1') then 
+				loadR <= '1';
+				inputR <= input;
+
+			elsif (increment = '1') then
+				loadR <= '1';
+				inputR <= inc;
+			else
+				loadR <= '0';
+				inputR <= inputR;
+			end if;
+		end if; 
 	output <= outp;
-	end if;
-	end if; 
 	end process;
 end architecture;
