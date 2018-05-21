@@ -167,6 +167,13 @@ begin
       wait for 200 ps;
       assert(outZR = '0' and outNG = '1' and outSaida= "1111111111111111")  report "Falha em teste: 19" severity error;
 
+
+      -- Teste: 19
+      inX <= "0000000000000001"; inY <= "0000000000000111";
+      inZX <= '1'; inNX <= '1'; inZY <= '0'; inNY <= '0'; inF <= '0'; inNO <= '0';
+      wait for 200 ps;
+      assert(outZR = '0' and outNG = '0' and outSaida= "0000000000000111")  report "Falha em teste: 20" severity error;
+
     test_runner_cleanup(runner); -- Simulacao acaba aqui
 
   end process;
