@@ -49,4 +49,5 @@ script:
   #- python Projetos/F-Assembly/script/testeAssembly.py
   #- python Projetos/I-VM/scripts/testeVm.py
   #- python Projetos/H-Assembler/scripts/testeAssemblyMyAssembler.py
-  - python Projetos/J-VMTranslator/scripts/testeVmMyTranslator.py
+  #- python Projetos/J-VMTranslator/scripts/testeVmMyTranslator.py
+  - python Projetos/G-Computador/script/testeAssemblyMyCPU.py
