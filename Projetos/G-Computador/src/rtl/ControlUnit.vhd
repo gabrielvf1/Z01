@@ -31,8 +31,8 @@ f  <= instruction(15) and instruction(8);
 no <= instruction(15) and instruction(7);
 
 muxALUI_A 	<= not instruction(15);
-muxAM_ALU	<= instruction(13);
-muxSD_ALU	<= instruction(14);
+muxAM_ALU	<= instruction(14) ;
+muxSD_ALU	<= not instruction(13);
 
 loadA <= not(instruction(15)) or instruction(6);
 loadD <= instruction(4) and instruction(15);

@@ -119,7 +119,7 @@ reg_d : Register16 port map(clock,s_ALUout,s_loadD,s_regDout);
 mux_sd : Mux16 port map(s_regSout,s_regDout,s_muxSD_ALU,s_muxSDout);
 
 
-alu_port : ALU port map(s_muxAM_ALUout,s_muxSDout,s_zx,s_nx,s_zy,s_ny,s_f,s_no,s_zr,s_ng,s_ALUout);
+alu_port : ALU port map(s_muxSDout,s_muxAM_ALUout,s_zx,s_nx,s_zy,s_ny,s_f,s_no,s_zr,s_ng,s_ALUout);
 
 pc_port : pc port map (clock,'1',s_loadPC,reset,s_regAout,s_pcout);
 

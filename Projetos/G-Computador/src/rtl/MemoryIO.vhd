@@ -116,13 +116,13 @@ signal outputRAM, outLed, inputScreen, s_LCD_D, saidaMux, sw15: STD_LOGIC_VECTOR
 
 BEGIN
 
-sel1 <= "00" when(ADDRESS < "011111111111111") 
-        else "01" when (ADDRESS < "101001010111111")
-        else "10" when (ADDRESS < "101001011000000")
+sel1 <= "00" when(ADDRESS >= std_logic_vector(to_unsigned(0,15)) and ADDRESS <= "011111111111111") 
+        else "10" when (ADDRESS > "011111111111111" and ADDRESS <= "101001010111111")
+        else "01" when (ADDRESS = "101001011000000")
         else "11";
 
-sel2 <= '1' when(ADDRESS < "011111111111111")
-        else '0';
+sel2 <= '0' when(ADDRESS = "101001011000001")
+        else '1';
 
 DMux: DMux4Way PORT MAP (LOAD, sel1, loadRAM, loadRegister, loadScreen, load0);
 

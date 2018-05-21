@@ -51,9 +51,8 @@ begin
 bitincrementer: Inc16 Port Map(outp,inc);
 registrador: Register16 Port Map(clock,inputR,loadR,outp);
 
-	process(clock,reset,increment,load)
+	process(reset,increment,load, input, inc, inputR)
 	begin
-
 		if(reset = '1') then
 			loadR <= '1';
 			inputR <= "0000000000000000";
