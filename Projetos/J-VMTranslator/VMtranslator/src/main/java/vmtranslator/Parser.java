@@ -24,7 +24,6 @@ public class Parser {
 	private BufferedReader fileReader; // leitor de arquivo
 	public int instruction_index = 0;
 	
-	
 	public ArrayList<Integer> label_indexes;
 	public ArrayList<String> label_content;
 
@@ -57,7 +56,7 @@ public class Parser {
     	parser_content = new ArrayList<String>();
     	label_content = new ArrayList<String>();
     	label_indexes = new ArrayList<Integer>();
-    	
+    	System.out.println(file);
     	while ((line = fileReader.readLine()) != null) {
 			if (line.contains("//")){
 				line = line.substring(0,line.indexOf("//"));	    				
@@ -113,6 +112,7 @@ public class Parser {
 	 *            instrução a ser analisada.
 	 * @return o tipo da instrução.
 	 */
+	
 	public CommandType commandType(String command) {
 		String[] parts = command.split(" ");
 
@@ -154,6 +154,9 @@ public class Parser {
 	 * @return somente o símbolo ou o valor número da instrução.
 	 */
 	public String arg1(String command) {
+		if(commandType(command) == Parser.CommandType.C_ARITHMETIC){
+			return command;
+		}
 		String[] parts = command.split(" ");
 		return parts[1];
 	}

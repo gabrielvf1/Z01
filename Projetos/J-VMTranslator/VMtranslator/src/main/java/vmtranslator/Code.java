@@ -313,21 +313,158 @@ public class Code {
             if (segment.equals("constant")) {
                 Error.error("Não faz sentido POP com constant");
             } else if (segment.equals("local")) {
+                
+                commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw (%A), %D"); // D tem o valor da pilha
+                
+                commands.add("leaw $LCL, %A");
+            	commands.add("movw (%A), %S");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %S, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw %D, (%A)");  //move D para o local
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $SP, %A" );
+                commands.add("movw %D, (%A)");
+                
+                
 
             } else if (segment.equals("argument")) {
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw (%A), %D"); // D tem o valor da pilha
+                
+                commands.add("leaw $ARG, %A");
+            	commands.add("movw (%A), %S");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %S, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw %D, (%A)"); 
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $SP, %A" );
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("this")) {
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw (%A), %D"); // D tem o valor da pilha
+                
+                commands.add("leaw $THIS, %A");
+            	commands.add("movw (%A), %S");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %S, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw %D, (%A)");  
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $SP, %A" );
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("that")) {
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw (%A), %D"); // D tem o valor da pilha
+                
+                commands.add("leaw $THAT, %A");
+            	commands.add("movw (%A), %S");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %S, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw %D, (%A)");  
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $SP, %A" );
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("static")) {
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw (%A), %D"); // D tem o valor da pilha
+                
+                commands.add("leaw $" + (16+index) + ", %A");
+            	commands.add("movw %D, (%A)");  
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $SP, %A" );
+                commands.add("movw %D, (%A)");
+            	
 
             } else if (segment.equals("temp")) {
-
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw (%A), %D"); // D tem o valor da pilha
+                
+                commands.add("leaw $" + (5+index) + ", %A");
+            	commands.add("movw %D, (%A)");  
+            	
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $SP, %A" );
+                commands.add("movw %D, (%A)");
+            	
             } else if (segment.equals("pointer")) {
                 if(index==0) {
+                	
+                	commands.add("leaw $SP, %A" );
+                    commands.add("movw (%A), %A");
+                    commands.add("decw %A");
+                    commands.add("movw (%A), %D"); // D tem o valor da pilha
+                    
+                    
+                    
+                	commands.add("leaw $3, %A");
+                	commands.add("movw %D, (%A)");
+                	
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw (%A), %A");
+                    commands.add("decw %A");
+                    commands.add("movw %A, %D");
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw %D, (%A)");
+                	
 
                 } else {
+                	commands.add("movw (%A), %A");
+                    commands.add("decw %A");
+                    commands.add("movw (%A), %D"); // D tem o valor da pilha                  
+                    
+                	commands.add("leaw $4, %A");
+                	commands.add("movw %D, (%A)");
+                	
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw (%A), %A");
+                    commands.add("decw %A");
+                    commands.add("movw %A, %D");
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw %D, (%A)");
 
                 }
             }
@@ -335,6 +472,7 @@ public class Code {
             commands.add(String.format("; %d - PUSH %s %d", lineCode++ ,segment, index));
 
             if (segment.equals("constant")) {
+            	
             	commands.add("leaw $" + index + ", %A");
             	commands.add("movw %A, %D");
             	commands.add("leaw $SP, %A" );
@@ -350,12 +488,16 @@ public class Code {
                 
             } else if (segment.equals("local")) {
 
-            	commands.add("leaw $" +(1+index)+ ", %A");
-            	commands.add("movw (%A), %D");
+            	commands.add("leaw $LCL, %A");
+            	commands.add("movw (%A), %D");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %D, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw (%A), %S");
             	
             	commands.add("leaw $SP, %A" );
                 commands.add("movw (%A), %A");
-                commands.add("movw %D, (%A)");
+                commands.add("movw %S, (%A)");
         	
                 commands.add("leaw $SP, %A" );
                 commands.add("movw (%A), %A");
@@ -366,12 +508,16 @@ public class Code {
                 
             } else if (segment.equals("argument")) {
             	 
-            	commands.add("leaw $" + (2+index) + ", %A");
-            	commands.add("movw (%A), %D");	
+            	commands.add("leaw $ARG, %A");
+            	commands.add("movw (%A), %D");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %D, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw (%A), %S");
             	
             	commands.add("leaw $SP, %A" );
                 commands.add("movw (%A), %A");
-                commands.add("movw %D, (%A)");
+                commands.add("movw %S, (%A)");
         	
                 commands.add("leaw $SP, %A" );
                 commands.add("movw (%A), %A");
@@ -382,12 +528,16 @@ public class Code {
             	
             } else if (segment.equals("this")) {
             	
-            	commands.add("leaw $R3, %A");
-            	commands.add("movw (%A), %D");
+            	commands.add("leaw $THIS, %A");
+            	commands.add("movw (%A), %D");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %D, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw (%A), %S");
             	
-//            	commands.add("leaw $R3, %A" );
-//              commands.add("movw (%A), %A");
-//              commands.add("movw %D, (%A)");
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("movw %S, (%A)");
         	
                 commands.add("leaw $SP, %A" );
                 commands.add("movw (%A), %A");
@@ -398,12 +548,16 @@ public class Code {
                 
             } else if (segment.equals("that")) {
             	
-            	commands.add("leaw $R4, %A");
-            	commands.add("movw (%A), %D");
+            	commands.add("leaw $THAT, %A");
+            	commands.add("movw (%A), %D");          	
+            	commands.add("leaw $" + index + ", %A");
+            	commands.add("addw %D, %A, %S");
+            	commands.add("movw %S, %A");
+            	commands.add("movw (%A), %S");
             	
-//            	commands.add("leaw $SP, %A" );
-//              commands.add("movw %A, %A");
-//              commands.add("movw %D, (%A)");
+            	commands.add("leaw $SP, %A" );
+                commands.add("movw (%A), %A");
+                commands.add("movw %S, (%A)");
         	
                 commands.add("leaw $SP, %A" );
                 commands.add("movw (%A), %A");
@@ -444,8 +598,35 @@ public class Code {
                 commands.add("movw %D, (%A)");
             } else if (segment.equals("pointer")) {
                 if(index==0) {
-
+                	
+                	commands.add("leaw $3, %A");
+                	commands.add("movw (%A), %D");
+                	
+                	commands.add("leaw $SP, %A" );
+                    commands.add("movw (%A), %A");
+                    commands.add("movw %D, (%A)");                   
+            	
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw (%A), %A");
+                    commands.add("incw %A");
+                    commands.add("movw %A, %D");
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw %D, (%A)");
+                	
                 } else {
+                	commands.add("leaw $4, %A");
+                	commands.add("movw (%A), %D");
+                	
+                	commands.add("leaw $SP, %A" );
+                    commands.add("movw (%A), %A");
+                    commands.add("movw %D, (%A)");                   
+            	
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw (%A), %A");
+                    commands.add("incw %A");
+                    commands.add("movw %A, %D");
+                    commands.add("leaw $SP, %A" );
+                    commands.add("movw %D, (%A)");
 
                 }
             }
