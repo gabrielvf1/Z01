@@ -690,7 +690,12 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Incondicional", lineCode++));
-
+        commands.add("leaw $" + (filename) + "-"+ (label) + ", %A");
+        commands.add("movw %A, %D");
+        commands.add("jmp %D");
+        commands.add("nop");
+//        commands.add("movw %SP, %A");
+//        commands.add("movw %D, (%A)");
     }
 
     /**
@@ -702,7 +707,15 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Condicional", lineCode++));
-
+        commands.add("leaw $SP,%A");
+        commands.add("movw (%A),%D");
+        commands.add("leaw $" + (filename) + "-" + (label) + ", %A");
+        commands.add("movw %A, %S");
+        commands.add("leaw $0,%A");
+        commands.add("negw %A");
+        commands.add("subw %A,%D,%A");
+        commands.add("je %S");
+        commands.add("nop");
      }
 
     /**
