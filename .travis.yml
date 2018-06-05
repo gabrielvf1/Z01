@@ -47,9 +47,8 @@ script:
   - python Projetos/D-UnidadeLogicaAritmetica/script/testULA.py
   - python Projetos/E-LogicaSequencial/script/testeLogicaSequencial.py
   - python Projetos/F-Assembly/script/testeAssembly.py
-  - python Projetos/I-VM/scripts/testeVm.py
-  - python Projetos/H-Assembler/scripts/testeAssemblyMyAssembler.py
-  - python Projetos/J-VMTranslator/scripts/testeVmMyTranslator.py
   - python Projetos/G-Computador/script/testeAssemblyMyCPU.py
   - python Projetos/H-Assembler/scripts/testeAssemblyMyAssembler.py
   - python Projetos/I-VM/scripts/testeVm.py
+  - python Projetos/J-VMTranslator/scripts/testeVmMyTranslator.py
+  
