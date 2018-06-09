@@ -48,7 +48,7 @@ script:
   - python Projetos/E-LogicaSequencial/script/testeLogicaSequencial.py
   - python Projetos/F-Assembly/scripts/testeAssembly.py
   - python Projetos/G-Computador/script/testeAssemblyMyCPU.py
-  #- python Projetos/H-Assembler/scripts/testeAssemblyMyAssembler.py
+  - python Projetos/H-Assembler/scripts/testeAssemblyMyAssembler.py
   - python Projetos/I-VM/scripts/testeVm.py
   #- python Projetos/J-VMTranslator/scripts/testeVmMyTranslator.py
   
