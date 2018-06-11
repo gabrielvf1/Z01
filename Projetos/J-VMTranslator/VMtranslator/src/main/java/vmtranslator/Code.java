@@ -21,6 +21,7 @@ public class Code {
     PrintWriter outputFile = null;  // arquivo .nasm de saída
     String filename = null;         // arquivo .vm de entrada
     int lineCode = 0;               // Linha do codigo vm que gerou as instrucoes
+    int contadorELG = 0;
 
     /**
      * Abre o arquivo de saida e prepara para escrever
@@ -97,7 +98,7 @@ public class Code {
                 commands.add("movw (%A), %D");
                 commands.add("decw %A");
                 commands.add("subw (%A), %D, %S");
-                commands.add("leaw $EQUALS, %A  ");
+                commands.add("leaw $EQUALS"+(contadorELG)+", %A  ");
                 commands.add("je %S");
                 commands.add("nop");
                 
@@ -110,11 +111,11 @@ public class Code {
 				commands.add("movw %A, %S");
 				commands.add("movw %D, %A");
 				commands.add("movw %S, (%A)");
-				commands.add("leaw $END,%A");
+				commands.add("leaw $END"+(contadorELG)+",%A");
 				commands.add("jmp");
 				commands.add("nop");
 				
-				commands.add("EQUALS:");
+				commands.add("EQUAL"+(contadorELG)+":");
 				commands.add("leaw $0,%A");
 				commands.add("movw %A,%D");
 				commands.add("decw %D");
@@ -127,18 +128,18 @@ public class Code {
 				commands.add("movw %A %D");
 				commands.add("leaw $SP,%A");
 				commands.add("movw %D,(%A)");
-				commands.add("leaw $END2,%A");
+				commands.add("leaw $END2"+(contadorELG)+",%A");
 				commands.add("jmp");
 				commands.add("nop");
 				
-				commands.add("END:");
+				commands.add("END"+(contadorELG)+":");
 				commands.add("nop");
 				commands.add("leaw $SP,%A");
 				commands.add("movw (%A),%D");
 				commands.add("decw %D");
 				commands.add("movw %D,(%A)");
-				commands.add("END2:");
-                
+				commands.add("END2"+(contadorELG)+":");
+                contadorELG+=1;
                 
                 
                 
@@ -151,7 +152,7 @@ public class Code {
                 commands.add("movw (%A), %D");
                 commands.add("decw %A");
                 commands.add("subw (%A), %D, %S");
-                commands.add("leaw $GREATER, %A  ");
+                commands.add("leaw $GREATER"+(contadorELG)+", %A  ");
                 commands.add("jg %S");
                 commands.add("nop");
                 
@@ -164,11 +165,11 @@ public class Code {
 				commands.add("movw %A, %S");
 				commands.add("movw %D, %A");
 				commands.add("movw %S, (%A)");
-				commands.add("leaw $END,%A");
+				commands.add("leaw $END"+(contadorELG)+",%A");
 				commands.add("jmp");
 				commands.add("nop");
 				
-				commands.add("GREATER:");
+				commands.add("GREATER"+(contadorELG)+":");
 				commands.add("leaw $0,%A");
 				commands.add("movw %A,%D");
 				commands.add("decw %D");
@@ -181,17 +182,18 @@ public class Code {
 				commands.add("movw %A %D");
 				commands.add("leaw $SP,%A");
 				commands.add("movw %D,(%A)");
-				commands.add("leaw $END2,%A");
+				commands.add("leaw $END2"+(contadorELG)+",%A");
 				commands.add("jmp");
 				commands.add("nop");
 				
-				commands.add("END:");
+				commands.add("END"+(contadorELG)+":");
 				commands.add("nop");
 				commands.add("leaw $SP,%A");
 				commands.add("movw (%A),%D");
 				commands.add("decw %D");
 				commands.add("movw %D,(%A)");
-				commands.add("END2:");
+				commands.add("END2"+(contadorELG)+":");
+				contadorELG+=1;
 
         } else if (command.equals("lt")) {
             commands.add(String.format("; %d - LT", lineCode++));
@@ -202,7 +204,7 @@ public class Code {
             commands.add("movw (%A), %D");
             commands.add("decw %A");
             commands.add("subw (%A), %D, %S");
-            commands.add("leaw $LOWER, %A  ");
+            commands.add("leaw $LOWER"+(contadorELG)+", %A  ");
             commands.add("jl %S");
             commands.add("nop");
             
@@ -215,11 +217,11 @@ public class Code {
 			commands.add("movw %A, %S");
 			commands.add("movw %D, %A");
 			commands.add("movw %S, (%A)");
-			commands.add("leaw $END,%A");
+			commands.add("leaw $END"+(contadorELG)+",%A");
 			commands.add("jmp");
 			commands.add("nop");
 			
-			commands.add("LOWER:");
+			commands.add("LOWER"+(contadorELG)+":");
 			commands.add("leaw $0,%A");
 			commands.add("movw %A,%D");
 			commands.add("decw %D");
@@ -232,17 +234,18 @@ public class Code {
 			commands.add("movw %A %D");
 			commands.add("leaw $SP,%A");
 			commands.add("movw %D,(%A)");
-			commands.add("leaw $END2,%A");
+			commands.add("leaw $END2"+(contadorELG)+",%A");
 			commands.add("jmp");
 			commands.add("nop");
 			
-			commands.add("END:");
+			commands.add("END"+(contadorELG)+":");
 			commands.add("nop");
 			commands.add("leaw $SP,%A");
 			commands.add("movw (%A),%D");
 			commands.add("decw %D");
 			commands.add("movw %D,(%A)");
-			commands.add("END2:");
+			commands.add("END2"+(contadorELG)+":");
+			contadorELG+=1;
 
         } else if (command.equals("and")) {
             commands.add(String.format("; %d - AND", lineCode++));
@@ -678,7 +681,9 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add( "; Label (marcador)" );
-
+        commands.add((filename) + "-"+ (label) + ":");
+        System.out.println(label);
+        
     }
 
     /**
@@ -687,10 +692,16 @@ public class Code {
      * @param  label define jump a ser realizado para um label (marcador).
      */
     public void writeGoto(String label) {
-
+    	
         List<String> commands = new ArrayList<String>();
+        
         commands.add(String.format("; %d - Goto Incondicional", lineCode++));
-
+        commands.add("leaw $" + (filename) + "-"+ (label) + ", %A");
+        //commands.add("decw %A");
+        commands.add("jmp");
+        commands.add("nop");
+        //commands.add("movw %SP, %A");
+        //commands.add("movw %D, (%A)");
     }
 
     /**
@@ -701,8 +712,17 @@ public class Code {
     public void writeIf(String label) {
 
         List<String> commands = new ArrayList<String>();
+        
         commands.add(String.format("; %d - Goto Condicional", lineCode++));
-
+        commands.add("leaw $SP,%A");
+        commands.add("movw (%A),%D");
+        commands.add("leaw $0,%A");
+        commands.add("negw %A");
+        commands.add("subw %A,%D,%D");
+        commands.add("leaw $" + (filename) + "-" + (label) + ", %A");
+        commands.add("decw %A");
+        commands.add("je %D");
+        commands.add("nop");
      }
 
     /**
@@ -714,7 +734,61 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - chamada de funcao %s", lineCode++, functionName));
+        
+        //push return-address
+        commands.add("leaw $SP,%A");
+        commands.add("movw (%A),%S");
+        commands.add("leaw $SP,%A");
+        commands.add("movw (%A),%A");
+        commands.add("incw %A");
+        commands.add("movw %S,(%A)");
 
+
+        //push LCL
+        commands.add("incw %S");
+        commands.add("leaw $R1,%A");
+        commands.add("movw (%A),%S");
+
+
+        //push ARG
+        commands.add("incw %S");
+        commands.add("leaw $R2,%A");
+        commands.add("movw (%A),%S");
+
+
+        //push THIS
+        commands.add("incw %S");
+        commands.add("leaw $R3,%A");
+        commands.add("movw (%A),%S");
+
+
+        //push THAT
+        commands.add("incw %S");
+        commands.add("leaw $R4,%A");
+        commands.add("movw (%A),%S");
+
+
+        //LCL = SP
+        commands.add("leaw $SP,%A");
+        commands.add("movw (%A),%D");
+        commands.add("leaw $R1,%A");
+        commands.add("movw %D,%A");
+
+
+        //ARG = SP-n-5
+        commands.add("leaw $5,%A");
+        commands.add("movw %A,%S");
+        commands.add("leaw $"+(numArgs)+",%A");
+        commands.add("incw %S, %A, %A");
+        commands.add("subw %D, %A, %S");
+        commands.add("leaw $R2,%A");
+        commands.add("movw %S,%A");
+
+        //goto f
+        commands.add("leaw $" +(functionName)+ ",%A");
+        commands.add("movw %A,%D");
+        commands.add("jmp %D");
+        commands.add("nop");
     }
 
     /**
@@ -724,8 +798,60 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Retorno de função", lineCode++));
+        
+        // FRAME = LCL
+        commands.add("leaw $R1,%A");
+        commands.add("movw (%A),%S");
 
+        //RET = *(FRAME-5)
+        commands.add("movw %S,%D");
+        commands.add("leaw $5,%A");
+        commands.add("subw %D, %A, %D");
+
+        //*ARG=pop()
+
+
+        //SP=ARG+1 
+        commands.add("leaw $R1,%A");
+        commands.add("movw (%A),%S");
+        commands.add("incw %S");
+        commands.add("leaw $R0,%A");
+        commands.add("movw %S,%A");
+
+
+        //THAT = *(FRAME-1)
+        commands.add("leaw $1,%A");
+        commands.add("subw %S, %A, %S");
+        commands.add("leaw $R4,%A");
+        commands.add("movw %S,%A");
+
+
+        //THIS = *(FRAME-2)
+        commands.add("leaw $2,%A");
+        commands.add("subw %S, %A, %S");
+        commands.add("leaw $R3,%A");
+        commands.add("movw %S,%A");
+
+
+        //ARG = *(FRAME-3)
+        commands.add("leaw $3,%A");
+        commands.add("subw %S, %A, %S");
+        commands.add("leaw $R2,%A");
+        commands.add("movw %S,%A");
+
+
+        //LCL = *(FRAME-4)
+        commands.add("leaw $4,%A");
+        commands.add("subw %S, %A, %S");
+        commands.add("leaw $R1,%A");
+        commands.add("movw %S,%A");
+
+
+        //goto RET
+        commands.add("jmp %D");
+        commands.add("nop");
     }
+
 
     /**
      * Grava no arquivo de saida as instruções em Assembly para a declaração de uma função.
@@ -736,6 +862,12 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Declarando função %s", lineCode++, functionName));
+        commands.add((filename) + "-"+(functionName)+":");
+        int i=numLocals;
+        while (i>0){
+        	writePushPop(Parser.CommandType.C_PUSH, "constant", 0);
+            i-=1;
+        }
 
     }
 
@@ -765,4 +897,4 @@ public class Code {
         this.outputFile.close();
     }
 
-}
+		}
