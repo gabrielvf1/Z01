@@ -684,6 +684,10 @@ public class Code {
         commands.add((filename) + "-"+ (label) + ":");
         System.out.println(label);
         
+        String[] stringArray = new String[ commands.size() ];
+        commands.toArray( stringArray );
+        write(stringArray);
+        
     }
 
     /**
@@ -697,11 +701,15 @@ public class Code {
         
         commands.add(String.format("; %d - Goto Incondicional", lineCode++));
         commands.add("leaw $" + (filename) + "-"+ (label) + ", %A");
-        //commands.add("decw %A");
         commands.add("jmp");
         commands.add("nop");
         //commands.add("movw %SP, %A");
         //commands.add("movw %D, (%A)");
+        String[] stringArray = new String[ commands.size() ];
+        commands.toArray( stringArray );
+        write(stringArray);
+        
+        
     }
 
     /**
@@ -715,14 +723,21 @@ public class Code {
         
         commands.add(String.format("; %d - Goto Condicional", lineCode++));
         commands.add("leaw $SP,%A");
-        commands.add("movw (%A),%D");
-        commands.add("leaw $0,%A");
-        commands.add("negw %A");
-        commands.add("subw %A,%D,%D");
-        commands.add("leaw $" + (filename) + "-" + (label) + ", %A");
+        commands.add("movw (%A),%A");
         commands.add("decw %A");
-        commands.add("je %D");
+        commands.add("movw %A,%S");
+        commands.add("movw (%A),%D");
+        commands.add("leaw $SP, %A");
+        commands.add("movw %S, (%A)");
+        commands.add("leaw $" + (filename) + "-" + (label) + ", %A");
+        commands.add("jne %D");
         commands.add("nop");
+        
+        
+        
+        String[] stringArray = new String[ commands.size() ];
+        commands.toArray( stringArray );
+        write(stringArray);
      }
 
     /**
@@ -789,6 +804,10 @@ public class Code {
         commands.add("movw %A,%D");
         commands.add("jmp %D");
         commands.add("nop");
+        
+        String[] stringArray = new String[ commands.size() ];
+        commands.toArray( stringArray );
+        write(stringArray);
     }
 
     /**
@@ -850,6 +869,10 @@ public class Code {
         //goto RET
         commands.add("jmp %D");
         commands.add("nop");
+        
+        String[] stringArray = new String[ commands.size() ];
+        commands.toArray( stringArray );
+        write(stringArray);
     }
 
 
@@ -867,6 +890,10 @@ public class Code {
         while (i>0){
         	writePushPop(Parser.CommandType.C_PUSH, "constant", 0);
             i-=1;
+            
+        String[] stringArray = new String[ commands.size() ];
+        commands.toArray( stringArray );
+        write(stringArray);
         }
 
     }

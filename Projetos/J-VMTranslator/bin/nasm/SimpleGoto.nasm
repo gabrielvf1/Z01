@@ -10,6 +10,12 @@ incw %A
 movw %A, %D
 leaw $SP, %A
 movw %D, (%A)
+; 1 - Goto Incondicional
+leaw $scripts/../../I-VM/src/vmExamples/SimpleGoto-END2, %A
+jmp
+nop
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/SimpleGoto-DUMMY:
 ; 2 - PUSH constant 3
 leaw $3, %A
 movw %A, %D
@@ -22,6 +28,8 @@ incw %A
 movw %A, %D
 leaw $SP, %A
 movw %D, (%A)
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/SimpleGoto-END2:
 ; 3 - POP temp 0
 leaw $SP, %A
 movw (%A), %A

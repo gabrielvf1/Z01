@@ -48,6 +48,8 @@ decw %A
 movw %A, %D
 leaw $SP, %A
 movw %D, (%A)
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/BasicLoop-LOOP_START:
 ; 4 - PUSH temp 0
 leaw $5, %A
 movw (%A), %D
@@ -117,6 +119,17 @@ movw (%A),%D
 decw %D
 movw %D,(%A)
 END20:
+; 7 - Goto Condicional
+leaw $SP,%A
+movw (%A),%A
+decw %A
+movw %A,%S
+movw (%A),%D
+leaw $SP, %A
+movw %S, (%A)
+leaw $scripts/../../I-VM/src/vmExamples/BasicLoop-END, %A
+jne %D
+nop
 ; 8 - PUSH temp 0
 leaw $5, %A
 movw (%A), %D
@@ -215,4 +228,10 @@ decw %A
 movw %A, %D
 leaw $SP, %A
 movw %D, (%A)
+; 16 - Goto Incondicional
+leaw $scripts/../../I-VM/src/vmExamples/BasicLoop-LOOP_START, %A
+jmp
+nop
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/BasicLoop-END:
 ; End

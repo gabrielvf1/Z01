@@ -79,6 +79,19 @@ movw (%A),%D
 decw %D
 movw %D,(%A)
 END20:
+; 4 - Goto Condicional
+leaw $SP,%A
+movw (%A),%A
+decw %A
+movw %A,%S
+movw (%A),%D
+leaw $SP, %A
+movw %S, (%A)
+leaw $scripts/../../I-VM/src/vmExamples/SimpleIfGoto-IF1, %A
+jne %D
+nop
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/SimpleIfGoto-ELSE1:
 ; 5 - PUSH constant 3
 leaw $3, %A
 movw %A, %D
@@ -91,6 +104,8 @@ incw %A
 movw %A, %D
 leaw $SP, %A
 movw %D, (%A)
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/SimpleIfGoto-IF1:
 ; 6 - POP temp 0
 leaw $SP, %A
 movw (%A), %A
@@ -173,6 +188,19 @@ movw (%A),%D
 decw %D
 movw %D,(%A)
 END21:
+; 10 - Goto Condicional
+leaw $SP,%A
+movw (%A),%A
+decw %A
+movw %A,%S
+movw (%A),%D
+leaw $SP, %A
+movw %S, (%A)
+leaw $scripts/../../I-VM/src/vmExamples/SimpleIfGoto-IF2, %A
+jne %D
+nop
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/SimpleIfGoto-ELSE2:
 ; 11 - PUSH constant 2
 leaw $2, %A
 movw %A, %D
@@ -198,4 +226,6 @@ decw %A
 movw %A, %D
 leaw $SP, %A
 movw %D, (%A)
+; Label (marcador)
+scripts/../../I-VM/src/vmExamples/SimpleIfGoto-IF2:
 ; End
