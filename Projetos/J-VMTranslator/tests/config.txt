@@ -23,14 +23,14 @@ StackTest 1 4000
 # label
 #--------------------
 BasicLoop 1 4000
-SimpleFunction 1 500
-StaticsTest 1 5000
-Mult 1 1000
-1a-Add 1 500
-1b-Add 1 500
-2a-Calculadora 1 500
-2b-Calculadora 1 4000
-2c-Calculadora 1 4000
-2d-Calculadora 1 4000
+#SimpleFunction 1 500
+#StaticsTest 1 5000
+#Mult 1 1000
+#1a-Add 1 500
+#1b-Add 1 500
+#2a-Calculadora 1 500
+#2b-Calculadora 1 4000
+#2c-Calculadora 1 4000
+#2d-Calculadora 1 4000
 SimpleGoto 1 200
 SimpleIfGoto 1 200

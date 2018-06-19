@@ -53,10 +53,10 @@ public class Parser {
 	public Parser(String file) throws IOException {
 		this.fileReader = new BufferedReader(new FileReader(file));
     	String line;
-    	parser_content = new ArrayList<String>();
+    	parser_content = new ArrayList<String>();//O ERRO ESTÄ AQUI!!!!!!!!!!!!!!!!!!
     	label_content = new ArrayList<String>();
     	label_indexes = new ArrayList<Integer>();
-    	System.out.println(file);
+    	//System.out.println(file);
     	while ((line = fileReader.readLine()) != null) {
 			if (line.contains("//")){
 				line = line.substring(0,line.indexOf("//"));	    				
@@ -101,6 +101,7 @@ public class Parser {
 	 */
 	public String command() {
 		String command = parser_content.get(instruction_index - 1);
+		//System.out.println(command);
 		return command;
 	}
 
@@ -125,6 +126,7 @@ public class Parser {
 		} else if (parts[0].equals("goto")) {
 			return Parser.CommandType.C_GOTO;
 		} else if (parts[0].equals("label")) {
+			System.out.println("PLAU");
 			return Parser.CommandType.C_LABEL;
 		} else if (parts[0].equals("function")) {
 			return Parser.CommandType.C_FUNCTION;
@@ -157,8 +159,10 @@ public class Parser {
 		if(commandType(command) == Parser.CommandType.C_ARITHMETIC){
 			return command;
 		}
-		String[] parts = command.split(" ");
-		return parts[1];
+		else{
+			String[] parts = command.split(" ");
+			return parts[1];
+		}
 	}
 
 	/**
@@ -172,6 +176,7 @@ public class Parser {
 	 */
 	public Integer arg2(String command) {
 		String[] parts = command.split(" ");
+		//System.out.println((parts[2]));
 		return Integer.parseInt(parts[2]);
 	}
 
