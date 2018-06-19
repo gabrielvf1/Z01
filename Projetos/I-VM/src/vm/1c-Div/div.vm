@@ -1,4 +1,4 @@
-function div 2
+function div2
 	push argument 0
 	pop local 0
  	push constant 0
