@@ -14,7 +14,6 @@ SimpleGt 3 200
 SimpleLt 3 200
 SimpleAnd 1 200
 SimpleOr 1 200
-#SimplePush 1 200 
 SimplePushAdd 1 200
 StackTest 1 4000
 #--------------------

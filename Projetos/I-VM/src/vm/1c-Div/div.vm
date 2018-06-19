@@ -1,24 +1,22 @@
-//Divisão | Retorna o número de vezes que é possível dividir o número pelo divisor, sem considerar o resto.
-
-function div  2	  	 // a/b
+function div2
 	push argument 0
-	pop local 0      // temp0 = a
- 	push constant 0   
-	pop local 1      // temp1 = 0
+	pop local 0
+ 	push constant 0
+	pop local 1
 
 label loop
-	push local 0 	 //16   11   6   1
-	push argument 1  //5
-	lt               //   a < b   16 < 5   11 < 5  6 < 5    
+	push local 0
+	push argument 1
+	lt
 	if-goto end
-	push local 0     //16   11  6
-	push argument 1  //5
-	sub    			 //16 - 5   11 - 5   6 - 5 
-	pop local 0      //11   6   1
-	push local 1	 //0    1   2
-	push constant 1  //1
-	add				 //0+1 1+1  2+1
-	pop local 1      //1   2    3 
+	push local 0
+	push argument 1
+	sub
+	pop local 0
+	push local 1
+	push constant 1
+	add
+	pop local 1
 	goto loop
 
 label end
