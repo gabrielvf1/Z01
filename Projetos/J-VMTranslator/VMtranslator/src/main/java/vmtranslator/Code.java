@@ -115,7 +115,7 @@ public class Code {
 				commands.add("jmp");
 				commands.add("nop");
 				
-				commands.add("EQUAL"+(contadorELG)+":");
+				commands.add("EQUALS"+(contadorELG)+":");
 				commands.add("leaw $0,%A");
 				commands.add("movw %A,%D");
 				commands.add("decw %D");
